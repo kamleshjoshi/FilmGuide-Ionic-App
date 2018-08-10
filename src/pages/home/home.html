@@ -1,18 +1,49 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+
+    <button start ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+
+    <ion-title>Browse</ion-title>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+<ion-content class="homepage-main">
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div class="homepage-slides" padding *ngIf="nowPlayingMovies$ | async as movies; else loading">
+    <ion-slides pager autoplay=" 3000 " loop="true">
+      <ion-slide *ngFor="let movie of movies.results" (click)="openMovieDetail(movie.id)">
+        <img src="http://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}">
+        <div class="centered">
+          <h2>{{movie.title}}</h2>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <h1 *ngIf="popularMovies$">Latest Releases</h1>
+
+  <div class="movies-flex" *ngIf="popularMovies$ | async as movies; else loading">
+    <div class="movie" *ngFor="let movie of movies.results" (click)="openMovieDetail(movie.id)">
+      <div class="poster">
+        <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+        <!-- <img *ngIf="movie.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"> -->
+      </div>
+      <div class="title">
+        <b>{{ movie.title }} {{ movie.release_date | date:'yyyy' }}</b>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+  </ng-template>
+
+  <div id="loadmore-button">
+    <Button ion-button>Load More</Button>
+  </div>
+
 </ion-content>

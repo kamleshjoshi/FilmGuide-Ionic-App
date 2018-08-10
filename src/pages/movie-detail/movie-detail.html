@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="currentMovie$ | async as movie">{{movie.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="movie-detail-main">
+
+  <div class="backdrop" *ngIf="currentMovie$ | async as movie">
+    <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/w780' + movie.backdrop_path">
+  </div>
+  <div class="backdrop-separator1"></div>
+  <div class="backdrop-separator2"></div>
+
+  <div class="poster" *ngIf="currentMovie$ | async as movie; else presentLoading()">
+    <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+    <!-- <img *ngIf="movie.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"> -->
+  </div>
+
+  <!-- <div class="movieDescription" *ngIf="currentMovie$ | async as movie; else loading"> -->
+  <div class="movieDescription" *ngIf="currentMovie$ | async as movie;">
+    <div class="movieTitle">{{movie.title}}</div>
+    <div class="movieDescription">{{movie.movieDescription}}</div>
+  </div>
+
+  <!-- <div *ngIf="currentMovie$ | async as movie; else loading">
+    <img src="http://image.tmdb.org/t/p/w780{{movie.backdrop_path + getApiKey()}}" class="movieDetailBackdrop" />
+
+    <h1>{{movie.title}}</h1>
+    <p>{{movie.overview}}</p>
+  </div> -->
+
+</ion-content>

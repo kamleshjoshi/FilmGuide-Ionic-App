@@ -1,3 +1,64 @@
-page-home {
+// ********************* HOME PAGE RELATED *********************
 
+// ***** HOMEPAGE GENERAL ***** //
+.homepage-main {
+    background-color: #f0f4f4;
+    color: #333338;
+}
+
+// ***** SLIDESHOW ***** //
+.homepage-slides {
+    color: white;
+}
+
+ion-app.md [padding] {
+    padding: 0px;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// ***** REST OF HOMEPAGE ***** //
+h1 {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 32px;
+    line-height: 32px;
+    margin: 8px 0 0px 8px;
+}
+
+.movies-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .movie {
+        flex: 0 170px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+
+        padding: 8px 8px;
+        margin: 10px 0;
+        background: #ffffff;
+
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2),
+            0 6px 10px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    img {
+        border: #f1f1f1 1px solid;
+    }
+}
+
+#loadmore-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
 }
