@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,44 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.side__menu {
+    background-color: #ffffff;
+    color: #333338;
+}
+
+.sidebarbackdrop {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+    background-size: 200%;
+    -webkit-filter: blur(1px);
+    z-index: -1;
+    position: relative;
+}
+
+.sidebarprofile {
+    margin-top: -3em;
+    text-align: center;
+}
+
+.sidebarprofile__img img {
+    border-radius: 90px;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+    border: 5px solid #fff;
+}
+
+.sidebarprofile__email {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.sidebarprofile__link {
+    text-decoration: none;
+    margin-top: 8px;
+    display: block;
+}

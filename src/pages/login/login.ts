@@ -1,9 +1,14 @@
 import { HomePage } from "./../home/home";
+import { AuthenticationProvider } from "./../../providers/authentication/authentication";
 import { RegisterPage } from "./../register/register";
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+    IonicPage,
+    NavController,
+    ToastController,
+    MenuController
+} from "ionic-angular";
 import { User } from "../../models/user";
-import { AngularFireAuth } from "angularfire2/auth";
 
 @IonicPage()
 @Component({
@@ -15,26 +20,37 @@ export class LoginPage {
 
     constructor(
         private navCtrl: NavController,
-        private navParams: NavParams,
-        private afAuth: AngularFireAuth
-    ) {}
+        private auth: AuthenticationProvider,
+        private toast: ToastController,
+        private menu: MenuController
+    ) {
+        this.menu.swipeEnable(false);
+    }
 
     ionViewDidLoad() {
         console.log("ionViewDidLoad LoginPage");
     }
 
-    async login(user: User) {
-        try {
-            const result = this.afAuth.auth.signInWithEmailAndPassword(
-                user.email,
-                user.password
-            );
-            if (result) {
-                this.navCtrl.setRoot(HomePage);
-            }
-        } catch (e) {
-            //console.log(e);
-        }
+    login(user: User) {
+        this.auth
+            .login(user)
+            .then(() => {
+                this.toast
+                    .create({
+                        message: "Logged in successfully",
+                        duration: 3000
+                    })
+                    .present();
+                this.navCtrl.setRoot(HomePage); // Send user to home page if successful...
+            })
+            .catch(error => {
+                this.toast
+                    .create({
+                        message: "Error: " + error.message,
+                        duration: 3000
+                    })
+                    .present();
+            });
     }
 
     register() {

@@ -16,7 +16,7 @@ import { ListPage } from "../pages/list/list";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { MovieDbProvider } from "../providers/movie-db/movie-db";
-import { AuthenticationProvider } from '../providers/authentication/authentication';
+import { AuthenticationProvider } from "../providers/authentication/authentication";
 
 @NgModule({
     declarations: [
@@ -48,7 +48,7 @@ import { AuthenticationProvider } from '../providers/authentication/authenticati
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         MovieDbProvider,
-    AuthenticationProvider
+        AuthenticationProvider
     ]
 })
 export class AppModule {}

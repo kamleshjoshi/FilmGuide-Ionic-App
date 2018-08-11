@@ -1,11 +1,12 @@
+import { AuthenticationProvider } from "./../providers/authentication/authentication";
 import { HomePage } from "./../pages/home/home";
 import { LoginPage } from "./../pages/login/login";
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform } from "ionic-angular";
+import { Nav, Platform, ToastController, AlertController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
-import { ListPage } from "../pages/list/list";
+import { RegisterPage } from "../pages/register/register";
 
 @Component({
     templateUrl: "app.html"
@@ -20,18 +21,20 @@ export class MyApp {
     constructor(
         public platform: Platform,
         public statusBar: StatusBar,
-        public splashScreen: SplashScreen
+        public splashScreen: SplashScreen,
+        private auth: AuthenticationProvider,
+        private toast: ToastController,
+        private alert: AlertController
     ) {
         this.initializeApp();
 
         // used for an example of ngFor and navigation
         this.pages = [
-            { title: "Login", component: LoginPage },
             { title: "Browse", component: HomePage },
             { title: "Watchlist", component: HomePage },
             { title: "Favourites", component: HomePage },
-            { title: "Recommendations", component: HomePage },
-            { title: "List", component: ListPage }
+            { title: "My Recommendations", component: HomePage },
+            { title: "About", component: HomePage }
         ];
     }
 
@@ -47,10 +50,59 @@ export class MyApp {
     openPage(page) {
         if (page.title === "Login") {
             this.nav.push(page.component);
-        } else {
-            // Reset the content nav to have just this page
-            // we wouldn't want the back button to show in this scenario
-            this.nav.setRoot(page.component);
+            return;
         }
+
+        if (
+            (page.title === "Watchlist" ||
+                page.title === "Favourites" ||
+                page.title === "My Recommendations") &&
+            !this.isAuthenticated()
+        ) {
+            this.alert
+                .create({
+                    title: "Sign In Required",
+                    subTitle: "Please Login to Access this feature.",
+                    buttons: [
+                        {
+                            text: "Sign In",
+                            handler: () => {
+                                this.login();
+                            }
+                        },
+                        {
+                            text: "Sign Up",
+                            handler: () => {
+                                this.register();
+                            }
+                        }
+                    ]
+                })
+                .present();
+            return;
+        }
+        this.nav.setRoot(page.component); // User signed in, all options available.
+    }
+
+    login() {
+        this.nav.push(LoginPage);
+    }
+
+    register() {
+        this.nav.push(RegisterPage);
+    }
+
+    logout() {
+        this.auth.logout();
+        this.toast
+            .create({
+                message: "Logged Out Successfully",
+                duration: 3000
+            })
+            .present();
+    }
+
+    isAuthenticated(): boolean {
+        return this.auth.isAuthenticated();
     }
 }

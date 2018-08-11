@@ -22,24 +22,6 @@ export class HomePage {
     ) {}
 
     ionViewWillLoad() {
-        this.afAuth.authState.subscribe(data => {
-            if (data && data.email && data.uid) {
-                this.toast
-                    .create({
-                        message: "Logged in Successfully",
-                        duration: 3000
-                    })
-                    .present();
-            } else {
-                this.toast
-                    .create({
-                        message: "Could not find authentication details",
-                        duration: 3000
-                    })
-                    .present();
-            }
-        });
-
         this.getNowPlayingMovies();
         this.getPopularMovies();
     }
