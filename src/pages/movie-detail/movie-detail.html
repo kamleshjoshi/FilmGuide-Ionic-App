@@ -9,19 +9,59 @@
   <div class="backdrop" *ngIf="currentMovie$ | async as movie">
     <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/w780' + movie.backdrop_path">
   </div>
-  <div class="backdrop-separator1"></div>
-  <div class="backdrop-separator2"></div>
 
-  <div class="poster" *ngIf="currentMovie$ | async as movie; else presentLoading()">
-    <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
-    <!-- <img *ngIf="movie.poster_path" class="poster-effect" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"> -->
+
+  <div class="movieheader">
+
+    <div class="movieheader__poster" *ngIf="currentMovie$ | async as movie; else presentLoading()">
+      <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+    </div>
+
+    <div class="movieheader__details" *ngIf="currentMovie$ | async as movie;">
+      <h1 class="movieheader__title">{{movie.title}}</h1>
+      <div>{{movie.movieDescription}}</div>
+      <div class="header-rating">
+        <strong>7.9</strong>/
+        <span class="text-grey">10</span>
+      </div>
+      <div>2009 Uk, USA
+        <span class="text-grey">2h 29min</span>
+      </div>
+      <div>
+        <span class="text-grey">Director:</span> John Doe
+      </div>
+      <div>
+        <span class="text-grey">Writer:</span> John Doe
+      </div>
+      <div>
+        Watchlist | Favourites
+      </div>
+
+    </div>
+
   </div>
 
-  <!-- <div class="movieDescription" *ngIf="currentMovie$ | async as movie; else loading"> -->
-  <div class="movieDescription" *ngIf="currentMovie$ | async as movie;">
-    <div class="movieTitle">{{movie.title}}</div>
-    <div class="movieDescription">{{movie.movieDescription}}</div>
+  <div class="movienav-wrap">
+    <ul class="movienav">
+      <li class="movienav__item movienav__item--active">
+        <a href="#">Info</a>
+      </li>
+      <li class="movienav__item">
+        <a href="#">Trailer</a>
+      </li>
+      <li class="movienav__item">
+        <a href="#">Comments</a>
+      </li>
+      <li class="movienav__item">
+        <a href="#">Awards</a>
+      </li>
+      <li class="movienav__item">
+        <a href="#">Reviews</a>
+      </li>
+    </ul>
   </div>
+
+
 
   <!-- <div *ngIf="currentMovie$ | async as movie; else loading">
     <img src="http://image.tmdb.org/t/p/w780{{movie.backdrop_path + getApiKey()}}" class="movieDetailBackdrop" />

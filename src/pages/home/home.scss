@@ -7,8 +7,17 @@
 }
 
 // ***** SLIDESHOW ***** //
-.homepage-slides {
-    color: white;
+.homepage-slides h2 {
+    color: 333338;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+
+    padding: 5px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-size: 32px;
+    line-height: 32px;
 }
 
 ion-app.md [padding] {
