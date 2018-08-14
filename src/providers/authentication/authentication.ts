@@ -24,7 +24,8 @@ export class AuthenticationProvider {
         return this.authState;
     }
 
-    async login(user: User) {
+    // ASYNC needed here?
+    login(user: User) {
         return this.afAuth.auth
             .signInWithEmailAndPassword(user.email, user.password)
             .then(usr => {
@@ -32,7 +33,8 @@ export class AuthenticationProvider {
             });
     }
 
-    async register(user: User) {
+    // ASYNC needed here?
+    register(user: User) {
         return this.afAuth.auth
             .createUserAndRetrieveDataWithEmailAndPassword(
                 user.email,
