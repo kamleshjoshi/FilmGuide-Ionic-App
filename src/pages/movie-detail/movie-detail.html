@@ -21,11 +21,12 @@
       <h1 class="movieheader__title">{{movie.title}}</h1>
       <div>{{movie.movieDescription}}</div>
       <div class="header-rating">
+        <span class="tvdbLabel">TVDB</span>
         <strong>7.9</strong>/
         <span class="text-grey">10</span>
       </div>
-      <div>2009 Uk, USA
-        <span class="text-grey">2h 29min</span>
+      <div>
+        <span class="text-grey">Runtime: </span> {{getMinToHours(movie.runtime)}}
       </div>
       <div>
         <span class="text-grey">Director:</span> John Doe
@@ -34,9 +35,9 @@
         <span class="text-grey">Writer:</span> John Doe
       </div>
       <div>
-        Watchlist | Favourites
+        <button ion-button small round outline color="secondary" (click)="addToWatchlist(movie.id)">Watchlist</button>  
+        <button ion-button small round outline color="secondary" (click)="addToFavourites(movie.id)">Favourites</button>
       </div>
-
     </div>
 
   </div>
@@ -59,6 +60,10 @@
         <a href="#">Reviews</a>
       </li>
     </ul>
+  </div>
+
+  <div class= "moviePlot" *ngIf="currentMovie$ | async as movie;">
+    <p>{{movie.overview}}</p>
   </div>
 
 

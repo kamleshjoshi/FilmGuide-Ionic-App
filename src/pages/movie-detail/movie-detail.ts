@@ -48,4 +48,20 @@ export class MovieDetailPage {
             this.loading.present();
         }
     }
+
+    addToWatchlist(movieId: number) {
+        console.log("Adding movie to watch list...");
+    }
+
+    addToFavourites(movieId: number) {
+        console.log('Adding movie to favourites');
+    }
+
+    getMinToHours(minutes: number) {
+        var h = Math.floor(minutes / 60);
+        var m = minutes % 60;
+        var hours  = h < 10 ? '0' + h : h;
+        var mins = m < 10 ? '0' + m : m;
+        return h + 'h ' + m +'m';
+    }
 }

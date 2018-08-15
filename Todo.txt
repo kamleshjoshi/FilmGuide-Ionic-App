@@ -1,0 +1,16 @@
+General:
+	- Searchbar + Search Results page
+	- Clean up Register and login pages
+	- Add frame around slideshow
+	- Reduce slideshow items and only show items with backdrops.
+	- Add default backdrop, poster images
+	- Add Actor page?
+
+Movie Details Page:
+	- Actors section? Use cards inside a slideshow carosel?
+	- Review section, Add review button
+
+
+Watchlist AND Favourites Page:
+	- Swipe on item to remove (with undo toast)
+	- Hold item for actionsheept (Delete, Favourite, Recommend, Cancel)

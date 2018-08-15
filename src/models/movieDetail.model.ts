@@ -3,5 +3,6 @@ export interface MovieDetail {
     backdrop_path: string,
     title: string,
     overview: string,
-    release_date: string
+    release_date: string,
+    runtime: number
 }

@@ -2,7 +2,7 @@ import { MovieDetailPage } from "./../movie-detail/movie-detail";
 import { Movies } from "./../../models/movies.model";
 import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { Component } from "@angular/core";
-import { NavController, ToastController } from "ionic-angular";
+import { NavController, ToastController, Loading, LoadingController } from "ionic-angular";
 import { Observable } from "../../../node_modules/rxjs/Observable";
 import { AngularFireAuth } from "angularfire2/auth";
 
@@ -13,12 +13,14 @@ import { AngularFireAuth } from "angularfire2/auth";
 export class HomePage {
     nowPlayingMovies$: Observable<Movies>;
     popularMovies$: Observable<Movies>;
+    loading: Loading;
 
     constructor(
         private navCtrl: NavController,
         private movieDbProvider: MovieDbProvider,
         private afAuth: AngularFireAuth,
-        private toast: ToastController
+        private toast: ToastController,
+        private loadingCtrl: LoadingController
     ) {}
 
     ionViewWillLoad() {
@@ -39,4 +41,5 @@ export class HomePage {
             movieObservable: this.movieDbProvider.getMovieDetail(movieId)
         });
     }
+
 }

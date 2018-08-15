@@ -23,10 +23,12 @@
 
       <div *ngIf="!isAuthenticated()">
         <div>
-          <span menuClose class="sidebarprofile__link" (click)="login()">Sign In</span>
-          <span menuClose class="sidebarprofile__link" (click)="register()">Sign Up</span>
+          <b>
+            <span menuClose class="sidebarprofile__link" (click)="login()">Sign In</span>
+            |
+            <span menuClose class="sidebarprofile__link" (click)="register()">Sign Up</span>
+          </b>
         </div>
-        <!-- <div class="sidebarprofile__link " (click)="register()">Register</div> -->
       </div>
     </div>
 
