@@ -8,6 +8,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFirestore } from 'angularfire2/firestore';
+
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
@@ -32,7 +34,8 @@ import { AuthenticationProvider } from "../providers/authentication/authenticati
         IonicModule.forRoot(MyApp),
         HttpClientModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG), // Initialise AngularFireModule with Firebase Config
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AngularFirestore
     ],
     bootstrap: [IonicApp],
     entryComponents: [
