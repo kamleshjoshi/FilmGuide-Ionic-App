@@ -1,3 +1,4 @@
+import { FirestoreProvider } from './../../providers/firestore/firestore';
 import { MovieDetail } from "./../../models/movieDetail.model";
 import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { Component } from "@angular/core";
@@ -29,7 +30,8 @@ export class MovieDetailPage {
     constructor(
         private navCtrl: NavController,
         private navParams: NavParams,
-        private loadingCtrl: LoadingController
+        private loadingCtrl: LoadingController,
+        private firestore: FirestoreProvider
     ) {
         // Constructor code here...
     }
@@ -51,6 +53,24 @@ export class MovieDetailPage {
 
     addToWatchlist(movieId: number) {
         console.log("Adding movie to watch list...");
+
+        //this.firestore.addToWatchlist(movieId);
+
+        // Change icon before process completion (UX Decision?)
+        // const loading = await this.loadingCtrl.create();
+
+        // this.firestoreService.addToWatchlist(movieId).then(
+        //     () => {
+        //       loading.dismiss();
+        //     },
+        //     error => {
+        //       console.error(error);
+        //     }
+        //   );
+        
+        // return await loading.present();
+
+        
     }
 
     addToFavourites(movieId: number) {

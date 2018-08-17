@@ -103,6 +103,11 @@ export class MyApp {
             .present();
     }
 
+    getUserEmail(): string {
+        return "Email Here";
+        //return this.auth.getUserEmail() || "Not Signed In";
+    }
+
     isAuthenticated(): boolean {
         return this.auth.isAuthenticated();
     }

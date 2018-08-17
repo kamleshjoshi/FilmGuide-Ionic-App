@@ -17,7 +17,7 @@
       </div>
 
       <div *ngIf="isAuthenticated()">
-        <div class="sidebarprofile__email">foo@gmail.com</div>
+        <div class="sidebarprofile__email">{{getUserEmail()}}</div>
         <div menuClose class="sidebarprofile__link" (click)="logout()">Logout</div>
       </div>
 

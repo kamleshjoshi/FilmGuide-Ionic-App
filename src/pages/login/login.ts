@@ -8,7 +8,7 @@ import {
     ToastController,
     MenuController
 } from "ionic-angular";
-import { User } from "../../models/user";
+import { User } from "../../models/user.model";
 
 @IonicPage()
 @Component({

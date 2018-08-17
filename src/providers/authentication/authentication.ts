@@ -1,4 +1,4 @@
-import { User } from "./../../models/user";
+import { User } from "../../models/user.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -46,8 +46,12 @@ export class AuthenticationProvider {
             });
     }
 
+    getUserID(): string {
+        return this.afAuth.auth.currentUser.uid;
+    }
+
     getUserEmail(): string {
-        return "User Email Here";
+        return this.afAuth.auth.currentUser.email;
     }
 
     //Sign user out of
