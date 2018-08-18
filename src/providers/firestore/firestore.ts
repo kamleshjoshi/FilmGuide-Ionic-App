@@ -12,12 +12,12 @@ export class FirestoreProvider {
 
   addToWatchlist(movieId: number){
 
-    // const userId = this.auth.getUserID(); 
+    const userId = this.auth.getUserID(); 
 
-    // return this.firestore.doc(`users/${userId}`).set({
-    //   userId,
-    //   watchlist: movieId
-    // });
+    return this.firestore.doc(`users/${userId}`).set({
+      userId,
+      watchlist: movieId;
+    });
 
   }
 }

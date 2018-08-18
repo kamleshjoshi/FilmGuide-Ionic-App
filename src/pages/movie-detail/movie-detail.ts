@@ -54,7 +54,7 @@ export class MovieDetailPage {
     addToWatchlist(movieId: number) {
         console.log("Adding movie to watch list...");
 
-        //this.firestore.addToWatchlist(movieId);
+        this.firestore.addToWatchlist(movieId);
 
         // Change icon before process completion (UX Decision?)
         // const loading = await this.loadingCtrl.create();
