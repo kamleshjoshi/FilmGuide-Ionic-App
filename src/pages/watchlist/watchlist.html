@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Watchlist</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: #f0f4f4">
+
+  <div *ngIf="detailedWatchlist$?.length > 0" class="watchlist">
+    <ion-list *ngFor="let obs of detailedWatchlist$;">
+
+
+      <ion-item *ngIf="obs | async as movie" (click)="openMovieDetail(movie.id)">
+        <div class="watchitem">
+          <div class="watchitem__poster">
+            <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+          </div>
+          <div class="watchitem__details">
+            <div class="watchitem__title">{{movie.title}}</div>
+            <div class="watchitem__genre">Action, Comedy</div>
+            <div class="watchitem__length">{{getMinToHours(movie.runtime)}}</div>
+            <p class="watchitem__plot">{{movie.overview | slice:0:75}} ... </p>
+          </div>
+        </div>
+
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <div *ngIf="detailedWatchlist$?.length === 0">
+    <h1 class="no-watchlist">No Items in the Watchlist</h1>
+  </div>
+
+</ion-content>

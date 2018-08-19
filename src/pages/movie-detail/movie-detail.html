@@ -34,11 +34,17 @@
       <div>
         <span class="text-grey">Writer:</span> John Doe
       </div>
-      <div>
-        <button ion-button small round outline color="secondary" (click)="addToWatchlist(movie.id)">Watchlist</button>  
-        <button ion-button small round outline color="secondary" (click)="addToFavourites(movie.id)">Favourites</button>
-      </div>
     </div>
+
+  </div>
+
+  <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
+    <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id)">Watchlist &nbsp;
+      <ion-icon md="md-add"></ion-icon>
+    </button>
+    <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id)">Favourites &nbsp;
+      <ion-icon md="md-heart-outline"></ion-icon>
+    </button>
 
   </div>
 
@@ -62,17 +68,8 @@
     </ul>
   </div>
 
-  <div class= "moviePlot" *ngIf="currentMovie$ | async as movie;">
+  <div class="moviePlot" *ngIf="currentMovie$ | async as movie;">
     <p>{{movie.overview}}</p>
   </div>
-
-
-
-  <!-- <div *ngIf="currentMovie$ | async as movie; else loading">
-    <img src="http://image.tmdb.org/t/p/w780{{movie.backdrop_path + getApiKey()}}" class="movieDetailBackdrop" />
-
-    <h1>{{movie.title}}</h1>
-    <p>{{movie.overview}}</p>
-  </div> -->
 
 </ion-content>

@@ -51,7 +51,13 @@ export class AuthenticationProvider {
     }
 
     getUserEmail(): string {
-        return this.afAuth.auth.currentUser.email;
+        return "Email Here";
+
+        // if (this.isAuthenticated() && this.afAuth.auth.currentUser.email) {
+        //     return this.afAuth.auth.currentUser.email;
+        // } else {
+        //     return "Email Here";
+        // }
     }
 
     //Sign user out of

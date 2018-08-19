@@ -1,8 +1,9 @@
 export interface MovieDetail {
-    id: number,
-    backdrop_path: string,
-    title: string,
-    overview: string,
-    release_date: string,
-    runtime: number
+    id: number;
+    poster_path: string;
+    backdrop_path: string;
+    title: string;
+    overview: string;
+    release_date: string;
+    runtime: number;
 }

@@ -1,3 +1,5 @@
+import { ListPage } from "./../pages/list/list";
+import { WatchlistPage } from "./../pages/watchlist/watchlist";
 import { AuthenticationProvider } from "./../providers/authentication/authentication";
 import { HomePage } from "./../pages/home/home";
 import { LoginPage } from "./../pages/login/login";
@@ -7,7 +9,6 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 
 import { RegisterPage } from "../pages/register/register";
-import { ListPage } from "../pages/list/list";
 
 @Component({
     templateUrl: "app.html"
@@ -32,8 +33,8 @@ export class MyApp {
         // used for an example of ngFor and navigation
         this.pages = [
             { title: "Browse", component: HomePage },
-            { title: "Watchlist", component: ListPage },
-            { title: "Favourites", component: HomePage },
+            { title: "Watchlist", component: WatchlistPage },
+            { title: "Favourites", component: ListPage },
             { title: "My Recommendations", component: HomePage },
             { title: "About", component: HomePage }
         ];
@@ -104,8 +105,7 @@ export class MyApp {
     }
 
     getUserEmail(): string {
-        return "Email Here";
-        //return this.auth.getUserEmail() || "Not Signed In";
+        return this.auth.getUserEmail();
     }
 
     isAuthenticated(): boolean {

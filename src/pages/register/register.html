@@ -4,18 +4,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="background: #aaa">
 
-  <ion-item>
-    <ion-label floating>Email Address</ion-label>
-    <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-  </ion-item>
+  <div class="loginbox">
+    <div class="loginbox__avatar">
+      <img src="../assets/imgs/profile_pic.jpg" />
+    </div>
+    <div class="loginbox__inner">
+      <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
 
-  <ion-item>
-    <ion-label floating>Password</ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-  </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
 
-  <button ion-button (click)="register(user)">Register</button>
+      <button ion-button (click)="register(user)" class="loginbox__btn">Register</button>
+    </div>
+  </div>
 
 </ion-content>

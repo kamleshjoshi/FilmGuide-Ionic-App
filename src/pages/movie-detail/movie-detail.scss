@@ -28,6 +28,11 @@
     margin: 0;
 }
 
+.movieheader__btngroup {
+    margin: 15px;
+    text-align: center;
+}
+
 .text-grey {
     color: grey;
 }
@@ -35,10 +40,9 @@
 .tvdbLabel {
     color: #01d277;
     padding: 2px;
-    background-color:#081c24;
+    background-color: #081c24;
     border-radius: 5px;
 }
-
 
 .movienav {
     margin: 20px 20px;
@@ -64,4 +68,9 @@
 
 .movienav__item.movienav__item--active a {
     color: red;
+}
+
+.moviePlot {
+    background: #fff;
+    padding: 1em;
 }

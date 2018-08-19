@@ -1,4 +1,5 @@
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { WatchlistPage } from "./../pages/watchlist/watchlist";
+import { AngularFirestoreModule } from "angularfire2/firestore";
 import { RegisterPage } from "./../pages/register/register";
 import { LoginPage } from "./../pages/login/login";
 import { FIREBASE_CONFIG } from "./app.firebase.config";
@@ -10,7 +11,6 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { AngularFireAuthModule } from "angularfire2/auth";
 
-
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
 import { ListPage } from "../pages/list/list";
@@ -19,7 +19,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { MovieDbProvider } from "../providers/movie-db/movie-db";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
-import { FirestoreProvider } from '../providers/firestore/firestore';
+import { FirestoreProvider } from "../providers/firestore/firestore";
 
 @NgModule({
     declarations: [
@@ -28,7 +28,8 @@ import { FirestoreProvider } from '../providers/firestore/firestore';
         ListPage,
         MovieDetailPage,
         LoginPage,
-        RegisterPage
+        RegisterPage,
+        WatchlistPage
     ],
     imports: [
         BrowserModule,
@@ -45,7 +46,8 @@ import { FirestoreProvider } from '../providers/firestore/firestore';
         ListPage,
         MovieDetailPage,
         LoginPage,
-        RegisterPage
+        RegisterPage,
+        WatchlistPage
     ],
     providers: [
         StatusBar,
@@ -53,7 +55,7 @@ import { FirestoreProvider } from '../providers/firestore/firestore';
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         MovieDbProvider,
         AuthenticationProvider,
-        FirestoreProvider,
+        FirestoreProvider
     ]
 })
 export class AppModule {}

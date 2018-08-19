@@ -1,0 +1,65 @@
+page-watchlist {
+    background: red;
+}
+
+.no-watchlist {
+    font-size: 1em;
+    text-align: center;
+    color: #aaa;
+}
+
+.watchlist {
+    margin-bottom: 15px;
+}
+
+.watchlist ion-item {
+    background: none;
+}
+
+.watchlist ion-label,
+.watchlist ion-list {
+    margin: 0;
+}
+
+.watchitem {
+    border: 1px solid #eee;
+    padding: 1em;
+    padding-left: calc(2em + 120px);
+    position: relative;
+    margin-top: 30px;
+    background: #fff;
+    min-height: 180px;
+}
+
+.watchitem__poster img {
+    max-width: 120px;
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+    border: 3px solid #fff;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.19);
+}
+
+.watchitem__details {
+    overflow: hidden;
+    font-size: 0.85em;
+}
+
+.watchitem__title {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.watchitem__genre {
+    color: #888;
+}
+
+.watchitem__length {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1em;
+}
+
+.watchitem__plot {
+    white-space: pre-wrap;
+}
