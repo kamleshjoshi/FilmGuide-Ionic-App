@@ -38,15 +38,34 @@
 
   </div>
 
-  <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
+  <!-- <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
     <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id)">Watchlist &nbsp;
       <ion-icon md="md-add"></ion-icon>
     </button>
     <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id)">Favourites &nbsp;
       <ion-icon md="md-heart-outline"></ion-icon>
     </button>
+  </div> -->
 
+  <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
+
+      <button ion-button small round solid color="secondary" *ngIf="!movieInWatchList$ || !isAuthenticated()" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id)">Watchlist &nbsp;
+          <ion-icon md="md-add-circle"></ion-icon>
+      </button>
+
+      <button ion-button small round outline color="secondary" *ngIf="movieInWatchList$" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id)">Watchlist &nbsp;
+          <ion-icon md="md-remove-circle"></ion-icon>
+      </button>
+
+      <button ion-button small round solid color="secondary" *ngIf="!movieInFavouritesList$  || !isAuthenticated()" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id)">Favourites &nbsp;
+          <ion-icon md="md-heart-outline"></ion-icon>
+      </button>
+
+      <button ion-button small round outline color="secondary" *ngIf="movieInFavouritesList$" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id)">Favourites &nbsp;
+          <ion-icon md="md-heart"></ion-icon>
+      </button>
   </div>
+
 
   <div class="movienav-wrap">
     <ul class="movienav">

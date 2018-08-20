@@ -14,10 +14,10 @@ export class FirestoreProvider {
 
         this.getList("watchlist").then(watchlist => {
             var filteredWatchlist: number[];
-
-            // Remove movie id from favourites array.
+            
             if (watchlist.indexOf(movieId) !== -1) {
                 filteredWatchlist = watchlist;
+                // Remove movie id from favourites array.
                 filteredWatchlist.splice(filteredWatchlist.indexOf(movieId), 1);
             } else {
                 var dirtyWatchlist = [...watchlist, movieId];

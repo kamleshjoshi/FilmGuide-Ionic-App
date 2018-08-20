@@ -4,6 +4,7 @@ General:
 	- Add frame around slideshow
 	- Reduce slideshow items and only show items with backdrops.
 	- Add default backdrop, poster images
+	- Load more on home page
 	- Add Actor page?
 
 Movie Details Page:

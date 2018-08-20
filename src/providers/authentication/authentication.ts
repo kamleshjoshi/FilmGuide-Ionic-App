@@ -51,7 +51,7 @@ export class AuthenticationProvider {
     }
 
     getUserEmail(): string {
-        return "tez995@gmail.com";
+        return "Fixme: Email Here";
 
         // if (this.isAuthenticated() && this.afAuth.auth.currentUser.email) {
         //     return this.afAuth.auth.currentUser.email;

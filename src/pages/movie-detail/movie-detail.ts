@@ -29,11 +29,12 @@ import { Observable } from "../../../node_modules/rxjs/Observable";
 })
 export class MovieDetailPage {
     currentMovie$: Observable<MovieDetail>;
-    isMovieInWatchListHm: Promise<boolean>;
     loading: Loading;
 
     movieInWatchList$: boolean;
     movieInFavouritesList$: boolean;
+
+
 
     constructor(
         private navParams: NavParams,
@@ -44,10 +45,18 @@ export class MovieDetailPage {
         private alert: AlertController
     ) {
         // Constructor code here...
+        this.movieInWatchList$ = false;
+        this.movieInFavouritesList$ = false;
     }
 
-    ionViewDidLoad() {
+    ionViewWillEnter() {
+        console.log("Entering movie details page");
         this.currentMovie$ = this.navParams.get("movieObservable"); // Connect the movie observable.
+
+        this.currentMovie$.subscribe( movie => {
+            this.isMovieInWatchlist(movie.id);
+            this.isMovieInFavouriteslist(movie.id);
+        });
     }
 
     presentLoading() {
@@ -67,6 +76,7 @@ export class MovieDetailPage {
             return;
         }
 
+        this.movieInWatchList$ = !this.movieInWatchList$;
         this.firestore.toggleWatchlistItem(movieId);
     }
 
@@ -75,31 +85,38 @@ export class MovieDetailPage {
             this.displayFeatureUnavailable("Favourites");
             return;
         }
+        this.movieInFavouritesList$ = !this.movieInFavouritesList$;
         this.firestore.toggleFavouritesItem(movieId);
     }
 
-    isMovieInWatchlist(movieId: number): Promise<boolean> {
+    isMovieInWatchlist(movieId: number): void {
+
+        console.log("Inside isMovieInWatchlist() with movieId: " + movieId);
+
         if (!this.auth.isAuthenticated()) {
-            //FIXME - ADD ALERT TO SIGNIN
-            //return false;
-            throw new Error("no");
+            return; // Not logged in, dont need to check favourites list status.
+            //throw new Error("Error - User Not logged in, Cannot check watchlist");
         }
 
-        return this.firestore.getList("watchlist").then(movies => {
-            return movies.indexOf(movieId) !== -1;
+        this.firestore.getList("watchlist").then(movies => {
+            this.movieInWatchList$ = movies.indexOf(movieId) === 1;
+
         });
     }
 
-    isMovieInFavouriteslist(movieId: number): Promise<boolean> {
+    isMovieInFavouriteslist(movieId: number): void{
         if (!this.auth.isAuthenticated()) {
-            //FIXME - ADD ALERT TO SIGNIN
-            //return false;
-            throw new Error("no");
+            return; // Not logged in, dont need to check favourites list status.
+            //throw new Error("Error - User Not logged in, Cannot check watchlist");
         }
 
-        return this.firestore.getList("favourites").then(movies => {
-            return movies.indexOf(movieId) !== -1;
+        this.firestore.getList("favourites").then(movies => {
+           this.movieInFavouritesList$ = movies.indexOf(movieId) === -1;
         });
+    }
+
+    isAuthenticated(): boolean{
+        return this.auth.isAuthenticated();
     }
 
     displayFeatureUnavailable(feature: string): void {
