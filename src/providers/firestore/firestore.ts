@@ -9,19 +9,21 @@ export class FirestoreProvider {
         private firestore: AngularFirestore
     ) {}
 
-    toggleWatchlistItem(movieId: number) {
+    toggleWatchlistItem(movieId: number, add: boolean) {
         const userId = this.auth.getUserID();
 
         this.getList("watchlist").then(watchlist => {
             var filteredWatchlist: number[];
             
-            if (watchlist.indexOf(movieId) !== -1) {
+            if (!add && watchlist.indexOf(movieId) !== -1) {
                 filteredWatchlist = watchlist;
                 // Remove movie id from favourites array.
                 filteredWatchlist.splice(filteredWatchlist.indexOf(movieId), 1);
-            } else {
+            } else if (add) {
                 var dirtyWatchlist = [...watchlist, movieId];
                 filteredWatchlist = Array.from(new Set(dirtyWatchlist));
+            } else {
+                console.log("ERROR: ****************************************");
             }
 
             this.firestore.doc(`users/${userId}`).set(
@@ -34,21 +36,24 @@ export class FirestoreProvider {
         });
     }
 
-    toggleFavouritesItem(movieId: number) {
+    toggleFavouritesItem(movieId: number, add: boolean) {
         const userId = this.auth.getUserID();
 
         this.getList("favourites").then(favourites => {
             var filteredFavouriteslist: number[];
 
             // Remove movie id from favourites array.
-            if (favourites.indexOf(movieId) !== -1) {
+            if (!add && favourites.indexOf(movieId) !== -1) {
                 filteredFavouriteslist = favourites;
                 filteredFavouriteslist.splice(favourites.indexOf(movieId), 1);
-            } else {
+            } else if (add) {
                 var dirtyfavouriteslist = [...favourites, movieId];
                 filteredFavouriteslist = Array.from(
                     new Set(dirtyfavouriteslist)
                 );
+            } else {
+                console.log("ERROR: ****************************************");
+                return;
             }
 
             this.firestore.doc(`users/${userId}`).set(

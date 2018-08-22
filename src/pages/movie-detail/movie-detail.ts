@@ -34,8 +34,6 @@ export class MovieDetailPage {
     movieInWatchList$: boolean;
     movieInFavouritesList$: boolean;
 
-
-
     constructor(
         private navParams: NavParams,
         private nav: NavController,
@@ -44,49 +42,36 @@ export class MovieDetailPage {
         private auth: AuthenticationProvider,
         private alert: AlertController
     ) {
-        // Constructor code here...
-        this.movieInWatchList$ = false;
-        this.movieInFavouritesList$ = false;
-    }
-
-    ionViewWillEnter() {
-        console.log("Entering movie details page");
         this.currentMovie$ = this.navParams.get("movieObservable"); // Connect the movie observable.
 
+        this.movieInWatchList$ = false;
+        this.movieInFavouritesList$ = false;
+
+        // THE PROBLEM IS HERE....???
         this.currentMovie$.subscribe( movie => {
+            console.log("Watchlist or favourites updated...")
             this.isMovieInWatchlist(movie.id);
             this.isMovieInFavouriteslist(movie.id);
         });
     }
 
-    presentLoading() {
-        if (!this.loading) {
-            console.log("Presenting loading...");
-            this.loading = this.loadingCtrl.create({
-                content: "Loading Movie Details...",
-                dismissOnPageChange: true
-            });
-            this.loading.present();
-        }
-    }
-
-    toggleWatchlistItem(movieId: number): void {
+    toggleWatchlistItem(movieId: number, add: boolean): void {
         if (!this.auth.isAuthenticated()) {
             this.displayFeatureUnavailable("Watchlist");
             return;
         }
 
-        this.movieInWatchList$ = !this.movieInWatchList$;
-        this.firestore.toggleWatchlistItem(movieId);
+        this.movieInWatchList$ = add;
+        this.firestore.toggleWatchlistItem(movieId, add);
     }
 
-    toggleFavouritesItem(movieId: number): void {
+    toggleFavouritesItem(movieId: number, add: boolean): void {
         if (!this.auth.isAuthenticated()) {
             this.displayFeatureUnavailable("Favourites");
             return;
         }
-        this.movieInFavouritesList$ = !this.movieInFavouritesList$;
-        this.firestore.toggleFavouritesItem(movieId);
+        this.movieInFavouritesList$ = add;
+        this.firestore.toggleFavouritesItem(movieId, add);
     }
 
     isMovieInWatchlist(movieId: number): void {
@@ -95,11 +80,10 @@ export class MovieDetailPage {
 
         if (!this.auth.isAuthenticated()) {
             return; // Not logged in, dont need to check favourites list status.
-            //throw new Error("Error - User Not logged in, Cannot check watchlist");
         }
 
         this.firestore.getList("watchlist").then(movies => {
-            this.movieInWatchList$ = movies.indexOf(movieId) === 1;
+            this.movieInWatchList$ = movies.indexOf(movieId) !== -1;
 
         });
     }
@@ -107,11 +91,10 @@ export class MovieDetailPage {
     isMovieInFavouriteslist(movieId: number): void{
         if (!this.auth.isAuthenticated()) {
             return; // Not logged in, dont need to check favourites list status.
-            //throw new Error("Error - User Not logged in, Cannot check watchlist");
         }
 
         this.firestore.getList("favourites").then(movies => {
-           this.movieInFavouritesList$ = movies.indexOf(movieId) === -1;
+           this.movieInFavouritesList$ = movies.indexOf(movieId) !== -1;
         });
     }
 
@@ -140,6 +123,17 @@ export class MovieDetailPage {
                 ]
             })
             .present();
+    }
+
+    presentLoading() {
+        if (!this.loading) {
+            console.log("Presenting loading...");
+            this.loading = this.loadingCtrl.create({
+                content: "Loading Movie Details...",
+                dismissOnPageChange: true
+            });
+            this.loading.present();
+        }
     }
 
     getMinToHours(minutes: number) {
