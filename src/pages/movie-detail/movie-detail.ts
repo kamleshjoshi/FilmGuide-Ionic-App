@@ -1,3 +1,4 @@
+import { ActorDetailPage } from "./../actor-detail/actor-detail";
 import { Review } from "./../../models/review.model";
 import { ReviewModalPage } from "./../review-modal/review-modal";
 import { RegisterPage } from "./../register/register";
@@ -43,7 +44,7 @@ export class MovieDetailPage {
 
     constructor(
         private navParams: NavParams,
-        private nav: NavController,
+        private navCtrl: NavController,
         private loadingCtrl: LoadingController,
         private firestore: FirestoreProvider,
         private auth: AuthenticationProvider,
@@ -128,6 +129,10 @@ export class MovieDetailPage {
         reviewModal.present();
     }
 
+    openActorDetail(castId: string) {
+        this.navCtrl.push(ActorDetailPage);
+    }
+
     displayFeatureUnavailable(feature: string): void {
         this.alert
             .create({
@@ -137,13 +142,13 @@ export class MovieDetailPage {
                     {
                         text: "Sign In",
                         handler: () => {
-                            this.nav.push(LoginPage);
+                            this.navCtrl.push(LoginPage);
                         }
                     },
                     {
                         text: "Sign Up",
                         handler: () => {
-                            this.nav.push(RegisterPage);
+                            this.navCtrl.push(RegisterPage);
                         }
                     }
                 ]

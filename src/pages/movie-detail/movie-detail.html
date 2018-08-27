@@ -83,7 +83,7 @@
 
       <div *ngFor="let castItem of movieCast.cast; let i = index">
         <div *ngIf="castItem.profile_path">
-          <ion-slide *ngIf="i < 10">
+          <ion-slide *ngIf="i < 10" (click)="openActorDetail(castItem.cast_id)">
             <img [src]="'https://image.tmdb.org/t/p/w200' + castItem.profile_path">
           </ion-slide>
         </div>
@@ -101,17 +101,16 @@
 
     <div *ngIf="currentMovieReviews && currentMovieReviews.length > 0">
       <div *ngFor="let review of currentMovieReviews">
-        <p>{{review.reviewText}}</p>
         <div class="review">
           <div class="review__header">
-            <img src="" alt="" class="review__avatar">
+            <img src="../assets/imgs/profile_pic.jpg" alt="" class="review__avatar">
             <div class="review__userinfo">
-              <span class="review__name">John Doe</span>
-              <div class="span review__date">Feb 14, 1994</div>
+              <span class="review__name">{{review.username}}</span>
+              <div class="span review__date">{{review.date}}</div>
             </div>
-            <div class="review__rating">A+</div>
+            <div class="review__rating">{{review.grade}}</div>
           </div>
-          <div class="review__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error inventore labore pariatur.</div>
+          <div class="review__body">{{review.reviewText}}</div>
         </div>
       </div>
     </div>

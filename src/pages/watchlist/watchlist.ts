@@ -55,7 +55,8 @@ export class WatchlistPage {
     openMovieDetail(movieId: string) {
         this.navCtrl.push(MovieDetailPage, {
             movieObservable: this.movieDbProvider.getMovieDetail(movieId),
-            movieCastObservable: this.movieDbProvider.getMovieCredits(movieId)
+            movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
+            movieId: movieId
         });
     }
 
