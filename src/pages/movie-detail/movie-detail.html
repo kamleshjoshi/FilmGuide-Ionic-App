@@ -91,9 +91,31 @@
     </ion-slides>
   </div>
 
-  <div class="reviews__section">
+  <div class="reviews-wrapper">
     <h4>Recent User Reviews</h4>
-    <p>No User Reviews</p>
+    <button ion-button (click)="displayReviewModal()" class="reviews-btn">Submit Review</button>
+
+    <div *ngIf="!currentMovieReviews || currentMovieReviews.length == 0">
+      <p>No Recent User Reviews</p>
+    </div>
+
+    <div *ngIf="currentMovieReviews && currentMovieReviews.length > 0">
+      <div *ngFor="let review of currentMovieReviews">
+        <p>{{review.reviewText}}</p>
+        <div class="review">
+          <div class="review__header">
+            <img src="" alt="" class="review__avatar">
+            <div class="review__userinfo">
+              <span class="review__name">John Doe</span>
+              <div class="span review__date">Feb 14, 1994</div>
+            </div>
+            <div class="review__rating">A+</div>
+          </div>
+          <div class="review__body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error inventore labore pariatur.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </ion-content>

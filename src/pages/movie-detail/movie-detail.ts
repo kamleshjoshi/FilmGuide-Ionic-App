@@ -1,9 +1,10 @@
+import { Review } from "./../../models/review.model";
+import { ReviewModalPage } from "./../review-modal/review-modal";
 import { RegisterPage } from "./../register/register";
 import { LoginPage } from "./../login/login";
 import { AuthenticationProvider } from "./../../providers/authentication/authentication";
 import { FirestoreProvider } from "./../../providers/firestore/firestore";
 import { MovieDetail } from "./../../models/movieDetail.model";
-import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { Component } from "@angular/core";
 import {
     IonicPage,
@@ -11,7 +12,8 @@ import {
     NavParams,
     LoadingController,
     Loading,
-    AlertController
+    AlertController,
+    ModalController
 } from "ionic-angular";
 import { Observable } from "../../../node_modules/rxjs/Observable";
 import { MovieCredits } from "../../models/movieCredits.model";
@@ -35,6 +37,9 @@ export class MovieDetailPage {
     movieInFavouritesList$: boolean;
 
     loading: Loading;
+    currentMovieReviews: Review[];
+
+    movieId: string;
 
     constructor(
         private navParams: NavParams,
@@ -42,10 +47,19 @@ export class MovieDetailPage {
         private loadingCtrl: LoadingController,
         private firestore: FirestoreProvider,
         private auth: AuthenticationProvider,
-        private alert: AlertController
+        private alert: AlertController,
+        private modalCtrl: ModalController
     ) {
         this.currentMovie$ = this.navParams.get("movieObservable"); // Connect the movie observable.
         this.currentMovieCast$ = this.navParams.get("movieCastObservable"); // Connect the movie cast observable
+
+        this.movieId = this.navParams.get("movieId");
+
+        this.firestore
+            .getMovieReviews(this.navParams.get("movieId"))
+            .then(reviews => {
+                this.currentMovieReviews = reviews;
+            });
 
         this.movieInWatchList$ = false;
         this.movieInFavouritesList$ = false;
@@ -59,7 +73,7 @@ export class MovieDetailPage {
 
     toggleWatchlistItem(movieId: number, add: boolean): void {
         if (!this.auth.isAuthenticated()) {
-            this.displayFeatureUnavailable("Watchlist");
+            this.displayFeatureUnavailable("add movie to watchlist");
             return;
         }
 
@@ -69,7 +83,7 @@ export class MovieDetailPage {
 
     toggleFavouritesItem(movieId: number, add: boolean): void {
         if (!this.auth.isAuthenticated()) {
-            this.displayFeatureUnavailable("Favourites");
+            this.displayFeatureUnavailable("add movie to favourites");
             return;
         }
         this.movieInFavouritesList$ = add;
@@ -102,11 +116,23 @@ export class MovieDetailPage {
         return this.auth.isAuthenticated();
     }
 
+    displayReviewModal() {
+        if (!this.auth.isAuthenticated()) {
+            this.displayFeatureUnavailable("submit a movie review");
+            return;
+        }
+
+        const reviewModal = this.modalCtrl.create(ReviewModalPage, {
+            movieId: this.movieId
+        });
+        reviewModal.present();
+    }
+
     displayFeatureUnavailable(feature: string): void {
         this.alert
             .create({
                 title: "Sign In Required",
-                subTitle: "Please Login to add Movie to " + feature,
+                subTitle: "Please Login to " + feature,
                 buttons: [
                     {
                         text: "Sign In",

@@ -1,3 +1,5 @@
+import { SearchResult } from "./../../models/searchResult.model";
+import { SearchResultsPage } from "./../search-results/search-results";
 import { MovieDetailPage } from "./../movie-detail/movie-detail";
 import { Movies } from "./../../models/movies.model";
 import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
@@ -12,7 +14,9 @@ import { Observable } from "../../../node_modules/rxjs/Observable";
 export class HomePage {
     nowPlayingMovies$: Observable<Movies>;
     popularMovies$: Observable<Movies>;
+
     loading: Loading;
+    isSearchbarOpen = false;
 
     constructor(
         private navCtrl: NavController,
@@ -32,10 +36,22 @@ export class HomePage {
         this.popularMovies$ = this.movieDbProvider.getPopularMovies();
     }
 
+    submitSearch(event) {
+        let query: string = event.target.value;
+
+        this.navCtrl.push(SearchResultsPage, {
+            searchResultObservable: this.movieDbProvider.getSearchResults(
+                query
+            ),
+            searchQuery: query
+        });
+    }
+
     openMovieDetail(movieId: string) {
         this.navCtrl.push(MovieDetailPage, {
             movieObservable: this.movieDbProvider.getMovieDetail(movieId),
-            movieCastObservable: this.movieDbProvider.getMovieCredits(movieId)
+            movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
+            movieId: movieId
         });
     }
 }

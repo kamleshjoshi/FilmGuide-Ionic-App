@@ -1,3 +1,4 @@
+import { FirestoreProvider } from "./../../providers/firestore/firestore";
 import { HomePage } from "./../home/home";
 import { AuthenticationProvider } from "./../../providers/authentication/authentication";
 import { Component } from "@angular/core";
@@ -23,7 +24,8 @@ export class RegisterPage {
         private navParams: NavParams,
         private auth: AuthenticationProvider,
         private toast: ToastController,
-        private menu: MenuController
+        private menu: MenuController,
+        private firestore: FirestoreProvider
     ) {
         this.menu.swipeEnable(false);
     }
@@ -32,6 +34,7 @@ export class RegisterPage {
         this.auth
             .register(user)
             .then(() => {
+                // firestore.addUser() here...???
                 this.toast
                     .create({
                         message: "Registered and Logged in successfully",

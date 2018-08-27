@@ -33,6 +33,12 @@
     text-align: center;
 }
 
+.movieheader__btn {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 0.8em;
+}
+
 .text-grey {
     color: grey;
 }
@@ -88,9 +94,50 @@
     max-width: 120px;
 }
 
-.reviews__section {
+.reviews-wrapper {
     margin-top: 15px;
     margin-bottom: 15px;
     background: #fff;
     padding: 1em;
+    position: relative;
+}
+.reviews-btn {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 0.8em;
+    padding: 5px 10px;
+}
+.review {
+    padding-bottom: 1em;
+    border-bottom: 1px solid #bbb;
+}
+.review__header {
+    flex-grow: 1;
+    display: flex;
+    margin-bottom: 1em;
+}
+.review__avatar {
+    background: red;
+    width: 50px;
+    height: 50px;
+    display: block;
+    border-radius: 25px;
+    margin-right: 15px;
+}
+.review__userinfo {
+    padding-top: 7px;
+    line-height: 20px;
+}
+.review__date {
+    font-size: 0.8em;
+}
+.review__name {
+    font-weight: bold;
+}
+.review__rating {
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: 10px;
+    color: green;
 }

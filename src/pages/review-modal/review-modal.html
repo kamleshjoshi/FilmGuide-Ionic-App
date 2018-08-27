@@ -1,0 +1,59 @@
+<!--
+  Generated template for the ReviewModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Submit Review</ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="closeReviewModal()">Cancel</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div class="reviewform">
+    <ion-item>
+      <ion-label floating>Display Name</ion-label>
+      <ion-input type="text" [(ngModel)]="review.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Grade</ion-label>
+      <ion-select [(ngModel)]="review.grade">
+        <ion-option value="A+">A+</ion-option>
+        <ion-option value="A">A</ion-option>
+        <ion-option value="A-">A-</ion-option>
+        <ion-option value="B+">B+</ion-option>
+        <ion-option value="B">B</ion-option>
+        <ion-option value="B-">B-</ion-option>
+        <ion-option value="C+">C+</ion-option>
+        <ion-option value="C">C</ion-option>
+        <ion-option value="C-">C-</ion-option>
+        <ion-option value="F">F-</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Review</ion-label>
+      <ion-textarea [(ngModel)]="review.reviewText"></ion-textarea>
+    </ion-item>
+
+    <button ion-button (click)="submitReview(review)">Submit Review</button>
+
+  </div>
+
+
+
+
+
+
+
+</ion-content>

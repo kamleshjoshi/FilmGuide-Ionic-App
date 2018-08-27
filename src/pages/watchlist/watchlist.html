@@ -12,7 +12,6 @@
   <div *ngIf="detailedWatchlist$?.length > 0" class="watchlist">
     <ion-list *ngFor="let obs of detailedWatchlist$;">
 
-
       <ion-item *ngIf="obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
           <div class="watchitem__poster">

@@ -5,8 +5,13 @@
       <ion-icon name="menu"></ion-icon>
     </button>
 
-    <ion-title>Browse</ion-title>
-
+    <ion-title *ngIf="!isSearchbarOpen">Browse</ion-title>
+    <ion-searchbar *ngIf="isSearchbarOpen" [showCancelButton]="true" (animated)="true" (search)="submitSearch($event)" (ionCancel)="isSearchbarOpen = false"></ion-searchbar>
+    <ion-buttons end>
+      <button ion-button icon-only *ngIf="!isSearchbarOpen" (click)="isSearchbarOpen=true">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

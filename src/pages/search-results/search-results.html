@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Results for "{{searchQuery}}"</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="searchResults$ | async as results">
+
+    <div *ngIf="results.results || results.results.length > 0">
+      <ion-list *ngFor="let movie of results.results;">
+        <ion-item (click)="openMovieDetail(movie.id)">
+          <div class="watchitem">
+            <div class="watchitem__poster">
+              <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+            </div>
+            <div class="watchitem__details">
+              <div class="watchitem__title">{{movie.title}}</div>
+              <p class="watchitem__plot">{{movie.overview | slice:0:175}} ... </p>
+            </div>
+          </div>
+
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngIf="!results.results || results.results.length <= 0">
+      <h1>Results not found</h1>
+    </div>
+
+
+  </div>
+
+</ion-content>

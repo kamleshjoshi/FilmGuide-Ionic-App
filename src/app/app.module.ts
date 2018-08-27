@@ -1,3 +1,5 @@
+import { SearchResultsPage } from "./../pages/search-results/search-results";
+import { ReviewModalPage } from "./../pages/review-modal/review-modal";
 import { FavouritesPage } from "./../pages/favourites/favourites";
 
 import { WatchlistPage } from "./../pages/watchlist/watchlist";
@@ -30,7 +32,9 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
         LoginPage,
         RegisterPage,
         WatchlistPage,
-        FavouritesPage
+        FavouritesPage,
+        ReviewModalPage,
+        SearchResultsPage
     ],
     imports: [
         BrowserModule,
@@ -48,15 +52,18 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
         LoginPage,
         RegisterPage,
         WatchlistPage,
-        FavouritesPage
+        FavouritesPage,
+        ReviewModalPage,
+        SearchResultsPage
     ],
     providers: [
         StatusBar,
         SplashScreen,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         MovieDbProvider,
+        FirestoreProvider,
         AuthenticationProvider,
-        FirestoreProvider
+        AngularFirestoreModule
     ]
 })
 export class AppModule {}

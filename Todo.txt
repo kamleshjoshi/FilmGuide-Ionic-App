@@ -1,12 +1,10 @@
 General:
-	- Look into Error message: "ERROR******" when adding and removing movies fast...
-	- Display movies page when ...
+	- Add/remove reviews
 	- Searchbar + Search Results page
-	- Clean up Register and login pages
-	- Add frame around slideshow
-	- Reduce slideshow items and only show items with backdrops.
 	- Add default backdrop, poster images
-	- Load more on home page
+
+	- Look into Error message: "ERROR******" when adding and removing movies fast...
+	- Load more on home page?
 	- Add Actor page?
 
 Movie Details Page:

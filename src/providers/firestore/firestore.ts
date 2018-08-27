@@ -1,3 +1,4 @@
+import { Review } from "./../../models/review.model";
 import { AngularFirestore } from "angularfire2/firestore";
 import { AuthenticationProvider } from "./../authentication/authentication";
 import { Injectable } from "@angular/core";
@@ -9,16 +10,15 @@ export class FirestoreProvider {
         private firestore: AngularFirestore
     ) {}
 
-    addMovieReview(movieId: number, grade: string, review: string) {}
+    addMovieReview(movieId: string, review: Review) {
+        console.log("MOVIEID IN FIRESTORE:" + movieId);
 
-    addUser(userId: string, username: string) {
-        this.firestore
-            .collection("users")
-            .doc(userId)
-            .set({
-                userId: userId,
-                username: username
+        this.getMovieReviews(movieId).then(reviewsArray => {
+            reviewsArray.push(review);
+            this.firestore.doc("movies/" + movieId).set({
+                reviews: reviewsArray
             });
+        });
     }
 
     toggleWatchlistItem(movieId: number, add: boolean) {
@@ -100,6 +100,28 @@ export class FirestoreProvider {
                         );
                         resolve([]);
                         //reject("Document not found");
+                    }
+                })
+                .catch(function(error) {
+                    reject("Error getting document: " + error);
+                });
+        });
+    }
+
+    getMovieReviews(movieId: string) {
+        return new Promise<Review[]>((resolve, reject) => {
+            this.firestore
+                .collection("movies")
+                .doc(movieId.toString())
+                .ref.get()
+                .then(function(doc) {
+                    if (doc.exists) {
+                        resolve(doc.data().reviews || []);
+                    } else {
+                        console.log(
+                            "Document not found, resolving empty array"
+                        );
+                        resolve([]);
                     }
                 })
                 .catch(function(error) {
