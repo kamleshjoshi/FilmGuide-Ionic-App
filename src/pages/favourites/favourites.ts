@@ -1,14 +1,13 @@
+import { MovieDetailPage } from "./../movie-detail/movie-detail";
 import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
-import { Movies } from "./../../models/movies.model";
 import { FirestoreProvider } from "./../../providers/firestore/firestore";
+import { MovieDetail } from "./../../models/movieDetail.model";
 import { Component } from "@angular/core";
 import { IonicPage, NavController } from "ionic-angular";
-import { Observable } from "../../../node_modules/rxjs";
-import { MovieDetail } from "../../models/movieDetail.model";
-import { MovieDetailPage } from "../movie-detail/movie-detail";
+import { Observable } from "rxjs";
 
 /**
- * Generated class for the WatchlistPage page.
+ * Generated class for the FavouritesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,12 +15,12 @@ import { MovieDetailPage } from "../movie-detail/movie-detail";
 
 @IonicPage()
 @Component({
-    selector: "page-watchlist",
-    templateUrl: "watchlist.html"
+    selector: "page-favourites",
+    templateUrl: "favourites.html"
 })
-export class WatchlistPage {
-    watchlist$: any[];
-    detailedWatchlist$: Observable<MovieDetail>[];
+export class FavouritesPage {
+    favourites$: any[];
+    detailedFavourites$: Observable<MovieDetail>[];
 
     constructor(
         private navCtrl: NavController,
@@ -31,23 +30,23 @@ export class WatchlistPage {
 
     ionViewWillLoad() {
         console.log("ionViewDidLoad WatchlistPage");
-        this.getWatchlist().then(() => {
-            this.getDetailedWatchList();
+        this.getFavourites().then(() => {
+            this.getDetailedFavourites();
         });
     }
 
-    getWatchlist() {
-        return this.firestore.getList("watchlist").then(movies => {
-            this.watchlist$ = movies;
+    getFavourites() {
+        return this.firestore.getList("favourites").then(movies => {
+            this.favourites$ = movies;
         });
     }
 
-    getDetailedWatchList() {
-        this.detailedWatchlist$ = [];
+    getDetailedFavourites() {
+        this.detailedFavourites$ = [];
         // Display backwards later to show recently watched first.
-        for (var i = 0; i < this.watchlist$.length; i++) {
-            this.detailedWatchlist$.push(
-                this.movieDbProvider.getMovieDetail(this.watchlist$[i])
+        for (var i = 0; i < this.favourites$.length; i++) {
+            this.detailedFavourites$.push(
+                this.movieDbProvider.getMovieDetail(this.favourites$[i])
             );
         }
     }

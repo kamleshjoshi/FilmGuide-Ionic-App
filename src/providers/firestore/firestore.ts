@@ -9,12 +9,24 @@ export class FirestoreProvider {
         private firestore: AngularFirestore
     ) {}
 
+    addMovieReview(movieId: number, grade: string, review: string) {}
+
+    addUser(userId: string, username: string) {
+        this.firestore
+            .collection("users")
+            .doc(userId)
+            .set({
+                userId: userId,
+                username: username
+            });
+    }
+
     toggleWatchlistItem(movieId: number, add: boolean) {
         const userId = this.auth.getUserID();
 
         this.getList("watchlist").then(watchlist => {
             var filteredWatchlist: number[];
-            
+
             if (!add && watchlist.indexOf(movieId) !== -1) {
                 filteredWatchlist = watchlist;
                 // Remove movie id from favourites array.

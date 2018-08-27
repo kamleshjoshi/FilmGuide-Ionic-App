@@ -1,3 +1,4 @@
+import { FirestoreProvider } from "./../firestore/firestore";
 import { User } from "../../models/user.model";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -13,7 +14,11 @@ import { AngularFireAuth } from "angularfire2/auth";
 export class AuthenticationProvider {
     authState = null;
 
-    constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
+    constructor(
+        private http: HttpClient,
+        private afAuth: AngularFireAuth,
+        private firestore: FirestoreProvider
+    ) {
         console.log("Hello AuthenticationProvider Provider");
         afAuth.authState.subscribe(state => {
             this.authState = state;
@@ -42,6 +47,7 @@ export class AuthenticationProvider {
             )
             .then(usr => {
                 this.authState = usr;
+                //this.firestore.addUser(this.getUserID, user.username);
                 return usr;
             });
     }

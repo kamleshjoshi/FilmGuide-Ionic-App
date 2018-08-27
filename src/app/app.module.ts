@@ -1,3 +1,5 @@
+import { FavouritesPage } from "./../pages/favourites/favourites";
+
 import { WatchlistPage } from "./../pages/watchlist/watchlist";
 import { AngularFirestoreModule } from "angularfire2/firestore";
 import { RegisterPage } from "./../pages/register/register";
@@ -13,7 +15,6 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 
 import { MyApp } from "./app.component";
 import { HomePage } from "../pages/home/home";
-import { ListPage } from "../pages/list/list";
 
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
@@ -25,11 +26,11 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
     declarations: [
         MyApp,
         HomePage,
-        ListPage,
         MovieDetailPage,
         LoginPage,
         RegisterPage,
-        WatchlistPage
+        WatchlistPage,
+        FavouritesPage
     ],
     imports: [
         BrowserModule,
@@ -43,11 +44,11 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
     entryComponents: [
         MyApp,
         HomePage,
-        ListPage,
         MovieDetailPage,
         LoginPage,
         RegisterPage,
-        WatchlistPage
+        WatchlistPage,
+        FavouritesPage
     ],
     providers: [
         StatusBar,

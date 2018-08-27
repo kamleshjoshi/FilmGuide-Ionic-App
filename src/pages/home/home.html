@@ -14,13 +14,18 @@
 <ion-content class="homepage-main">
 
   <div class="homepage-slides" padding *ngIf="nowPlayingMovies$ | async as movies; else loading">
-    <ion-slides pager autoplay=" 3000 " loop="true">
-      <ion-slide *ngFor="let movie of movies.results" (click)="openMovieDetail(movie.id)">
-        <img *ngIf="movie.backdrop_path" src="http://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}">
-        <div class="centered">
-          <!-- <h2>{{movie.title}}</h2> -->
+
+    <ion-slides pager autoplay="2500" loop="true">
+      <div *ngFor="let movie of movies.results; let i = index">
+        <div *ngIf="movie.backdrop_path">
+          <ion-slide *ngIf="i < 8" (click)="openMovieDetail(movie.id)">
+            <img src="http://image.tmdb.org/t/p/w780/{{movie.backdrop_path}}">
+            <div class="centered">
+              <h2>{{movie.title}}</h2>
+            </div>
+          </ion-slide>
         </div>
-      </ion-slide>
+      </div>
     </ion-slides>
   </div>
 

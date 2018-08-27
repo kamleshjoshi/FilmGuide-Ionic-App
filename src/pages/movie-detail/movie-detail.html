@@ -20,11 +20,6 @@
     <div class="movieheader__details" *ngIf="currentMovie$ | async as movie;">
       <h1 class="movieheader__title">{{movie.title}}</h1>
       <div>{{movie.movieDescription}}</div>
-      <div class="header-rating">
-        <span class="tvdbLabel">TVDB</span>
-        <strong>7.9</strong>/
-        <span class="text-grey">10</span>
-      </div>
       <div>
         <span class="text-grey">Runtime: </span> {{getMinToHours(movie.runtime)}}
       </div>
@@ -35,35 +30,29 @@
         <span class="text-grey">Writer:</span> John Doe
       </div>
     </div>
-
   </div>
 
-  <!-- <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
-    <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id)">Watchlist &nbsp;
-      <ion-icon md="md-add"></ion-icon>
-    </button>
-    <button ion-button small round outline color="secondary" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id)">Favourites &nbsp;
-      <ion-icon md="md-heart-outline"></ion-icon>
-    </button>
-  </div> -->
 
   <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
 
-      <button ion-button small round solid color="secondary" *ngIf="!movieInWatchList$ || !isAuthenticated()" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id, true)"> Add to Watchlist
-      </button>
+    <button ion-button small round solid color="secondary" *ngIf="!movieInWatchList$ || !isAuthenticated()" class="movieheader__btn"
+      (click)="toggleWatchlistItem(movie.id, true)"> Add to Watchlist
+    </button>
 
-      <button ion-button small round outline color="secondary" *ngIf="movieInWatchList$" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id, false)">Remove from Watchlist
-      </button>
+    <button ion-button small round outline color="secondary" *ngIf="movieInWatchList$" class="movieheader__btn" (click)="toggleWatchlistItem(movie.id, false)">Remove
+      from Watchlist
+    </button>
 
-      <button ion-button small round solid color="secondary" *ngIf="!movieInFavouritesList$  || !isAuthenticated()" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id, true)">Add to Favourites
-      </button>
+    <button ion-button small round solid color="secondary" *ngIf="!movieInFavouritesList$  || !isAuthenticated()" class="movieheader__btn"
+      (click)="toggleFavouritesItem(movie.id, true)">Add to Favourites
+    </button>
 
-      <button ion-button small round outline color="secondary" *ngIf="movieInFavouritesList$" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id, false)">Remove from Favourites
-      </button>
+    <button ion-button small round outline color="secondary" *ngIf="movieInFavouritesList$" class="movieheader__btn" (click)="toggleFavouritesItem(movie.id, false)">Remove
+      from Favourites
+    </button>
   </div>
 
-
-  <div class="movienav-wrap">
+  <!-- <div class="movienav-wrap">
     <ul class="movienav">
       <li class="movienav__item movienav__item--active">
         <a href="#">Info</a>
@@ -81,10 +70,30 @@
         <a href="#">Reviews</a>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <div class="moviePlot" *ngIf="currentMovie$ | async as movie;">
+    <h4>Overview</h4>
     <p>{{movie.overview}}</p>
+  </div>
+
+  <div class="cast__slideshow" *ngIf="currentMovieCast$ | async as movieCast;">
+    <h4>Cast</h4>
+    <ion-slides slidesPerView="2.5">
+
+      <div *ngFor="let castItem of movieCast.cast; let i = index">
+        <div *ngIf="castItem.profile_path">
+          <ion-slide *ngIf="i < 10">
+            <img [src]="'https://image.tmdb.org/t/p/w200' + castItem.profile_path">
+          </ion-slide>
+        </div>
+      </div>
+    </ion-slides>
+  </div>
+
+  <div class="reviews__section">
+    <h4>Recent User Reviews</h4>
+    <p>No User Reviews</p>
   </div>
 
 </ion-content>

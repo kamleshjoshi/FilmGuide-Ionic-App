@@ -72,5 +72,25 @@
 
 .moviePlot {
     background: #fff;
+    padding: 0.05em 1em;
+}
+
+.cast__slideshow {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background: #fff;
+    padding: 1em;
+}
+
+.cast__slideshow img {
+    // border: 1px solid #434e5f;
+    border-radius: 5px;
+    max-width: 120px;
+}
+
+.reviews__section {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background: #fff;
     padding: 1em;
 }

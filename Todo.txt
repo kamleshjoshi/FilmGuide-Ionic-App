@@ -1,5 +1,6 @@
 General:
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
+	- Display movies page when ...
 	- Searchbar + Search Results page
 	- Clean up Register and login pages
 	- Add frame around slideshow

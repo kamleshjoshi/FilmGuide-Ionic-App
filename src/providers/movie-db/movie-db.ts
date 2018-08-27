@@ -1,3 +1,4 @@
+import { MovieCredits } from "./../../models/movieCredits.model";
 import { HttpClient } from "@angular/common/http";
 import { MovieDetail } from "./../../models/movieDetail.model";
 import { Movies } from "./../../models/movies.model";
@@ -34,6 +35,13 @@ export class MovieDbProvider {
         console.log("Getting movie details for id: " + movieId);
         return this.http.get<MovieDetail>(
             this.API_URL + this.MOVIE_DETAIL + movieId + this.API_KEY
+        );
+    }
+
+    getMovieCredits(movieId: string) {
+        console.log("Getting movie credits for movieId: " + movieId);
+        return this.http.get<MovieCredits>(
+            this.API_URL + "movie/" + movieId + "/credits" + this.API_KEY
         );
     }
 }

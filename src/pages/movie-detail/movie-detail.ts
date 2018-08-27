@@ -14,6 +14,7 @@ import {
     AlertController
 } from "ionic-angular";
 import { Observable } from "../../../node_modules/rxjs/Observable";
+import { MovieCredits } from "../../models/movieCredits.model";
 
 /**
  * Generated class for the MovieDetailPage page.
@@ -29,10 +30,11 @@ import { Observable } from "../../../node_modules/rxjs/Observable";
 })
 export class MovieDetailPage {
     currentMovie$: Observable<MovieDetail>;
-    loading: Loading;
-
+    currentMovieCast$: Observable<MovieCredits>;
     movieInWatchList$: boolean;
     movieInFavouritesList$: boolean;
+
+    loading: Loading;
 
     constructor(
         private navParams: NavParams,
@@ -43,13 +45,13 @@ export class MovieDetailPage {
         private alert: AlertController
     ) {
         this.currentMovie$ = this.navParams.get("movieObservable"); // Connect the movie observable.
+        this.currentMovieCast$ = this.navParams.get("movieCastObservable"); // Connect the movie cast observable
 
         this.movieInWatchList$ = false;
         this.movieInFavouritesList$ = false;
 
-        // THE PROBLEM IS HERE....???
-        this.currentMovie$.subscribe( movie => {
-            console.log("Watchlist or favourites updated...")
+        this.currentMovie$.subscribe(movie => {
+            console.log("Watchlist or favourites updated...");
             this.isMovieInWatchlist(movie.id);
             this.isMovieInFavouriteslist(movie.id);
         });
@@ -75,7 +77,6 @@ export class MovieDetailPage {
     }
 
     isMovieInWatchlist(movieId: number): void {
-
         console.log("Inside isMovieInWatchlist() with movieId: " + movieId);
 
         if (!this.auth.isAuthenticated()) {
@@ -84,21 +85,20 @@ export class MovieDetailPage {
 
         this.firestore.getList("watchlist").then(movies => {
             this.movieInWatchList$ = movies.indexOf(movieId) !== -1;
-
         });
     }
 
-    isMovieInFavouriteslist(movieId: number): void{
+    isMovieInFavouriteslist(movieId: number): void {
         if (!this.auth.isAuthenticated()) {
             return; // Not logged in, dont need to check favourites list status.
         }
 
         this.firestore.getList("favourites").then(movies => {
-           this.movieInFavouritesList$ = movies.indexOf(movieId) !== -1;
+            this.movieInFavouritesList$ = movies.indexOf(movieId) !== -1;
         });
     }
 
-    isAuthenticated(): boolean{
+    isAuthenticated(): boolean {
         return this.auth.isAuthenticated();
     }
 

@@ -6,6 +6,7 @@
     box-sizing: border-box;
     transform: translateY(50px);
     position: relative;
+    border: 1px #434e5f solid;
 }
 .loginbox__avatar img {
     width: 100px;
@@ -13,8 +14,9 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+
     border-radius: 100px;
-    border: 5px solid #aaa;
+    border: 5px solid #f0f4f4;
     position: absolute;
     top: -50px;
 }

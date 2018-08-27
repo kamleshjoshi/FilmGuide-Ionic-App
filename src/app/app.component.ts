@@ -1,4 +1,4 @@
-import { ListPage } from "./../pages/list/list";
+import { FavouritesPage } from "./../pages/favourites/favourites";
 import { WatchlistPage } from "./../pages/watchlist/watchlist";
 import { AuthenticationProvider } from "./../providers/authentication/authentication";
 import { HomePage } from "./../pages/home/home";
@@ -34,7 +34,7 @@ export class MyApp {
         this.pages = [
             { title: "Browse", component: HomePage },
             { title: "Watchlist", component: WatchlistPage },
-            { title: "Favourites", component: ListPage },
+            { title: "Favourites", component: FavouritesPage },
             { title: "My Recommendations", component: HomePage },
             { title: "About", component: HomePage }
         ];
