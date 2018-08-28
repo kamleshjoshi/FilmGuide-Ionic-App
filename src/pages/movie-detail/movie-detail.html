@@ -69,7 +69,7 @@
     </button>
   </div>
 
-  <div class="movieDetailRating" class="movie__starrating" *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
+  <div class="movie__starrating" *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
     <div>
       <bar-rating [rate]="this.averageRating" [readOnly]="true" [max]="5"></bar-rating>
     </div>

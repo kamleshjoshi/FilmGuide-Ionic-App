@@ -148,6 +148,8 @@ export class FirestoreProvider {
     }
 
     getMovieRatings(movieId: string, tmdbAverage: number) {
+        let halved = tmdbAverage / 2;
+
         return new Promise<number[]>((resolve, reject) => {
             this.firestore
                 .collection("movies")
@@ -155,12 +157,12 @@ export class FirestoreProvider {
                 .ref.get()
                 .then(function(doc) {
                     if (doc.exists) {
-                        resolve(doc.data().ratings || [tmdbAverage]);
+                        resolve(doc.data().ratings || [halved]);
                     } else {
                         console.log(
                             "Document not found, resolving empty array"
                         );
-                        resolve([tmdbAverage]);
+                        resolve([halved]);
                     }
                 })
                 .catch(function(error) {

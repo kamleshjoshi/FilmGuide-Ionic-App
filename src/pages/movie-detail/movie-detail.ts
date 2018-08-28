@@ -73,11 +73,11 @@ export class MovieDetailPage {
         this.currentMovie$.subscribe(movie => {
             this.isMovieInWatchlist(movie.id);
             this.isMovieInFavouriteslist(movie.id);
-        });
 
-        this.getAverageRating(parseInt(this.movieId)).then(average => {
-            this.averageRating = average;
-            console.log("Average updated: " + this.averageRating);
+            this.getAverageRating(movie.vote_average).then(average => {
+                this.averageRating = average;
+                console.log("Average updated: " + this.averageRating);
+            });
         });
     }
 

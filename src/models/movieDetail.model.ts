@@ -6,4 +6,5 @@ export interface MovieDetail {
     overview: string;
     release_date: string;
     runtime: number;
+    vote_average: number;
 }
