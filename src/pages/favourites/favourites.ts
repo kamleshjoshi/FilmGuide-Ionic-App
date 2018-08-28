@@ -3,7 +3,7 @@ import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { FirestoreProvider } from "./../../providers/firestore/firestore";
 import { MovieDetail } from "./../../models/movieDetail.model";
 import { Component } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
+import { IonicPage, NavController, AlertController } from "ionic-angular";
 import { Observable } from "rxjs";
 
 /**
@@ -25,11 +25,15 @@ export class FavouritesPage {
     constructor(
         private navCtrl: NavController,
         private firestore: FirestoreProvider,
-        private movieDbProvider: MovieDbProvider
+        private movieDbProvider: MovieDbProvider,
+        private alertCtrl: AlertController
     ) {}
 
-    ionViewWillLoad() {
-        console.log("ionViewDidLoad WatchlistPage");
+    ionViewWillEnter() {
+        this.refreshFavourites();
+    }
+
+    refreshFavourites() {
         this.getFavourites().then(() => {
             this.getDetailedFavourites();
         });
@@ -57,6 +61,28 @@ export class FavouritesPage {
             movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
             movieId: movieId
         });
+    }
+
+    removeItemFromFavourites(
+        index: number,
+        movieId: number,
+        movieName: string
+    ) {
+        this.detailedFavourites$.splice(index, 1);
+
+        // Remove from watchlist
+        this.firestore.toggleFavouritesItem(movieId, false);
+    }
+
+    doRefresh(refresher) {
+        console.log("Begin async operation", refresher);
+
+        this.refreshFavourites();
+
+        setTimeout(() => {
+            console.log("Async operation has ended");
+            refresher.complete();
+        }, 2000);
     }
 
     getMinToHours(minutes: number) {

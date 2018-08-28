@@ -14,7 +14,7 @@ export class FirestoreProvider {
         console.log("MOVIEID IN FIRESTORE:" + movieId);
 
         this.getMovieReviews(movieId).then(reviewsArray => {
-            reviewsArray.push(review);
+            reviewsArray.unshift(review);
             this.firestore.doc("movies/" + movieId).set({
                 reviews: reviewsArray
             });

@@ -1,3 +1,5 @@
+import { ActorCredits } from "./../../models/actorCredits.model";
+import { ActorDetail } from "./../../models/actorDetail.model";
 import { SearchResult } from "./../../models/searchResult.model";
 import { MovieCredits } from "./../../models/movieCredits.model";
 import { HttpClient } from "@angular/common/http";
@@ -54,6 +56,20 @@ export class MovieDbProvider {
                 this.API_KEY +
                 "&query=" +
                 searchString
+        );
+    }
+
+    getActorDetails(actorId: string) {
+        console.log("Searching for actor details with id: " + actorId);
+        return this.http.get<ActorDetail>(
+            this.API_URL + "person/" + actorId + this.API_KEY
+        );
+    }
+
+    getActorCredits(actorId: string) {
+        console.log("Searching for actor credits with id: " + actorId);
+        return this.http.get<ActorCredits>(
+            this.API_URL + "person/" + actorId + "/movie_credits" + this.API_KEY
         );
     }
 }

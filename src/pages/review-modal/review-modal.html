@@ -1,10 +1,4 @@
-<!--
-  Generated template for the ReviewModalPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
     <ion-title>Submit Review</ion-title>
@@ -14,10 +8,14 @@
     </ion-buttons>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
-<ion-content padding>
+<ion-content class="reviewContent" padding>
+
+  <div class="reviewModalTitle">
+    <h2>Submit Review</h2>
+  </div>
 
   <div class="reviewform">
     <ion-item>
@@ -37,7 +35,7 @@
         <ion-option value="C+">C+</ion-option>
         <ion-option value="C">C</ion-option>
         <ion-option value="C-">C-</ion-option>
-        <ion-option value="F">F-</ion-option>
+        <ion-option value="F">F</ion-option>
       </ion-select>
     </ion-item>
 
@@ -46,14 +44,9 @@
       <ion-textarea [(ngModel)]="review.reviewText"></ion-textarea>
     </ion-item>
 
+    <button ion-button (click)="closeReviewModal()">Cancel</button>
     <button ion-button (click)="submitReview(review)">Submit Review</button>
 
   </div>
-
-
-
-
-
-
 
 </ion-content>

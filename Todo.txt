@@ -1,17 +1,42 @@
 General:
-	- Add/remove reviews
-	- Searchbar + Search Results page
-	- Add default backdrop, poster images
-
+	- Smaller when backdrop not available...
+	- Actor page
+	- RATING
+	- Movie Details - Director, Writer etc. details
+	- Various loading screens... Load until pictures etc. downloaded...
+	
+	- Auto refresh after review add
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
+	- Watchlist, Favourites - Swipe to delete
+	- Redesign Homepage grid?
 	- Load more on home page?
-	- Add Actor page?
+	
+Hamburger Menu
+	- Login/Logout
+	- Browse (Popular movies slideshow, latest movies grid below) -> Movie Page
+	- Favourties
+	- Watchlist
+	- Watched List
+	- Recommendations
+	- About
 
-Movie Details Page:
-	- Actors section? Use cards inside a slideshow carosel?
-	- Review section, Add review button
+
+DIFFERENT SCREENS
+- Loading/Splash Screen
+- Browse Screen 
+- Movie Screen (viewing movie info)
+- Search Result Screen
+- Favourites (Remove Button or swipe away to delete)
+- Watchlist (Remove Button or swipe away to delete)
+- Watched List (Remove Button or swipe away to delete)
+- Recommendations (Remove Button or swipe away to delete)
+- About Screen
+
+- Add reviews Screen or dialog box (Add Review - Star Selection + Paragraph)
+- Add rating Screen or simple dialog box
 
 
-Watchlist AND Favourites Page:
-	- Swipe on item to remove (with undo toast)
-	- Hold item for actionsheept (Delete, Favourite, Recommend, Cancel)
+
+FEATURES/UX:
+	- Lazy Loading Pages and Components
+	- 

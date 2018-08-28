@@ -1,10 +1,38 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Actor Name here</ion-title>
+    <ion-title>{{this.actorName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+
+  <div *ngIf="currentActorDetails$ | async as actorDetail">
+    <img *ngIf="actorDetail.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + actorDetail.profile_path" />
+    <img *ngIf="!actorDetail.profile_path" src="../assets/imgs/poster_unavailable.jpg" />
+
+    <div>
+      <p>{{actorDetail.biography}}</p>
+    </div>
+
+  </div>
+
+  <div *ngIf="currentActorCredits$ | async as actorCredits">
+    <h1>Known For</h1>
+    <div *ngFor="let movie of actorCredits.cast; let i = index">
+
+      <div *ngIf="i < 10">
+        <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+        <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
 
 </ion-content>

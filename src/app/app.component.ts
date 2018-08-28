@@ -105,7 +105,7 @@ export class MyApp {
     }
 
     getUserEmail(): string {
-        return this.auth.getUserEmail();
+        return this.auth.getUserEmail() || "Email Here";
     }
 
     isAuthenticated(): boolean {

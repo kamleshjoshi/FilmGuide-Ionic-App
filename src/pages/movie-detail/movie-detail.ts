@@ -1,3 +1,4 @@
+import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { ActorDetailPage } from "./../actor-detail/actor-detail";
 import { Review } from "./../../models/review.model";
 import { ReviewModalPage } from "./../review-modal/review-modal";
@@ -49,7 +50,8 @@ export class MovieDetailPage {
         private firestore: FirestoreProvider,
         private auth: AuthenticationProvider,
         private alert: AlertController,
-        private modalCtrl: ModalController
+        private modalCtrl: ModalController,
+        private movieDbProvider: MovieDbProvider
     ) {
         this.currentMovie$ = this.navParams.get("movieObservable"); // Connect the movie observable.
         this.currentMovieCast$ = this.navParams.get("movieCastObservable"); // Connect the movie cast observable
@@ -66,7 +68,6 @@ export class MovieDetailPage {
         this.movieInFavouritesList$ = false;
 
         this.currentMovie$.subscribe(movie => {
-            console.log("Watchlist or favourites updated...");
             this.isMovieInWatchlist(movie.id);
             this.isMovieInFavouriteslist(movie.id);
         });
@@ -123,14 +124,37 @@ export class MovieDetailPage {
             return;
         }
 
-        const reviewModal = this.modalCtrl.create(ReviewModalPage, {
-            movieId: this.movieId
-        });
+        const reviewModal = this.modalCtrl.create(
+            ReviewModalPage,
+            {
+                movieId: this.movieId
+            },
+            { cssClass: "review-modal" }
+        );
         reviewModal.present();
     }
 
-    openActorDetail(castId: string) {
-        this.navCtrl.push(ActorDetailPage);
+    openActorDetail(castId: string, actorName: string) {
+        this.navCtrl.push(ActorDetailPage, {
+            currentActorDetails: this.movieDbProvider.getActorDetails(castId),
+            currentActorCredits: this.movieDbProvider.getActorCredits(castId),
+            actorName: actorName
+        });
+    }
+
+    doRefresh(refresher) {
+        console.log("Begin async operation", refresher);
+
+        this.firestore
+            .getMovieReviews(this.navParams.get("movieId"))
+            .then(reviews => {
+                this.currentMovieReviews = reviews;
+            });
+
+        setTimeout(() => {
+            console.log("Async operation has ended");
+            refresher.complete();
+        }, 2000);
     }
 
     displayFeatureUnavailable(feature: string): void {

@@ -6,8 +6,13 @@
 
 <ion-content class="movie-detail-main">
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div class="backdrop" *ngIf="currentMovie$ | async as movie">
     <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/w780' + movie.backdrop_path">
+    <img *ngIf="!movie.poster_path" src="../assets/imgs/default_backdrop.jpg" />
   </div>
 
 
@@ -15,18 +20,31 @@
 
     <div class="movieheader__poster" *ngIf="currentMovie$ | async as movie; else presentLoading()">
       <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
+      <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
     </div>
 
     <div class="movieheader__details" *ngIf="currentMovie$ | async as movie;">
       <h1 class="movieheader__title">{{movie.title}}</h1>
       <div>{{movie.movieDescription}}</div>
-      <div>
+
+      <div class="metaInfo text-grey genre"> |
+        <span *ngFor="let genre of movie.genres; let i = index">
+          <span *ngIf="i < 3">
+            {{genre.name}} |
+          </span>
+        </span>
+      </div>
+
+      <div class="metaInfo">
+        <span class="text-grey">Release Date: </span> {{movie.release_date}}
+      </div>
+      <div class="metaInfo">
         <span class="text-grey">Runtime: </span> {{getMinToHours(movie.runtime)}}
       </div>
-      <div>
+      <div class="metaInfo">
         <span class="text-grey">Director:</span> John Doe
       </div>
-      <div>
+      <div class="metaInfo">
         <span class="text-grey">Writer:</span> John Doe
       </div>
     </div>
@@ -52,26 +70,6 @@
     </button>
   </div>
 
-  <!-- <div class="movienav-wrap">
-    <ul class="movienav">
-      <li class="movienav__item movienav__item--active">
-        <a href="#">Info</a>
-      </li>
-      <li class="movienav__item">
-        <a href="#">Trailer</a>
-      </li>
-      <li class="movienav__item">
-        <a href="#">Comments</a>
-      </li>
-      <li class="movienav__item">
-        <a href="#">Awards</a>
-      </li>
-      <li class="movienav__item">
-        <a href="#">Reviews</a>
-      </li>
-    </ul>
-  </div> -->
-
   <div class="moviePlot" *ngIf="currentMovie$ | async as movie;">
     <h4>Overview</h4>
     <p>{{movie.overview}}</p>
@@ -83,7 +81,7 @@
 
       <div *ngFor="let castItem of movieCast.cast; let i = index">
         <div *ngIf="castItem.profile_path">
-          <ion-slide *ngIf="i < 10" (click)="openActorDetail(castItem.cast_id)">
+          <ion-slide *ngIf="i < 10" (click)="openActorDetail(castItem.id, castItem.name)">
             <img [src]="'https://image.tmdb.org/t/p/w200' + castItem.profile_path">
           </ion-slide>
         </div>
@@ -93,7 +91,9 @@
 
   <div class="reviews-wrapper">
     <h4>Recent User Reviews</h4>
-    <button ion-button (click)="displayReviewModal()" class="reviews-btn">Submit Review</button>
+
+    <button ion-button small round solid color="secondary" class="reviews-btn" (click)="displayReviewModal()">Submit Review
+    </button>
 
     <div *ngIf="!currentMovieReviews || currentMovieReviews.length == 0">
       <p>No Recent User Reviews</p>

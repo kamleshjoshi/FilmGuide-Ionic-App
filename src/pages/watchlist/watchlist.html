@@ -9,13 +9,24 @@
 
 <ion-content style="background: #f0f4f4">
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div *ngIf="detailedWatchlist$?.length > 0" class="watchlist">
-    <ion-list *ngFor="let obs of detailedWatchlist$;">
+    <ion-list *ngFor="let obs of detailedWatchlist$; let i = index">
 
       <ion-item *ngIf="obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
+
+          <div (click)="removeItemFromWatchlist(i, movie.id, movie.title)" class="watchitem__deletebtn">
+            <ion-icon name="close"></ion-icon>
+          </div>
+
+
           <div class="watchitem__poster">
-            <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+            <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+            <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
           </div>
           <div class="watchitem__details">
             <div class="watchitem__title">{{movie.title}}</div>
@@ -24,11 +35,10 @@
                 <span *ngIf="i < 2">
                   {{genre.name}} |
                 </span>
-
               </span>
             </div>
             <div class="watchitem__length">{{getMinToHours(movie.runtime)}}</div>
-            <p class="watchitem__plot">{{movie.overview | slice:0:75}} ... </p>
+            <p class="watchitem__plot">{{movie.overview | slice:0:68}} ... </p>
           </div>
         </div>
 

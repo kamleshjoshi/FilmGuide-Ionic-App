@@ -1,3 +1,8 @@
-page-search-results {
+.searchResults,
+.searchResults ion-item {
+    background-color: #f0f4f4;
+}
 
+.searchResults ion-label {
+    margin: 0;
 }

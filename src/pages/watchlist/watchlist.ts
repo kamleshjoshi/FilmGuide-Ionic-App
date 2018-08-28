@@ -2,7 +2,7 @@ import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { Movies } from "./../../models/movies.model";
 import { FirestoreProvider } from "./../../providers/firestore/firestore";
 import { Component } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
+import { IonicPage, NavController, AlertController } from "ionic-angular";
 import { Observable } from "../../../node_modules/rxjs";
 import { MovieDetail } from "../../models/movieDetail.model";
 import { MovieDetailPage } from "../movie-detail/movie-detail";
@@ -26,11 +26,15 @@ export class WatchlistPage {
     constructor(
         private navCtrl: NavController,
         private firestore: FirestoreProvider,
-        private movieDbProvider: MovieDbProvider
+        private movieDbProvider: MovieDbProvider,
+        private alertCtrl: AlertController
     ) {}
 
-    ionViewWillLoad() {
-        console.log("ionViewDidLoad WatchlistPage");
+    ionViewWillEnter() {
+        this.refreshWatchlist();
+    }
+
+    refreshWatchlist() {
         this.getWatchlist().then(() => {
             this.getDetailedWatchList();
         });
@@ -52,12 +56,30 @@ export class WatchlistPage {
         }
     }
 
+    removeItemFromWatchlist(index: number, movieId: number, movieName: string) {
+        this.detailedWatchlist$.splice(index, 1);
+
+        // Remove from watchlist
+        this.firestore.toggleWatchlistItem(movieId, false);
+    }
+
     openMovieDetail(movieId: string) {
         this.navCtrl.push(MovieDetailPage, {
             movieObservable: this.movieDbProvider.getMovieDetail(movieId),
             movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
             movieId: movieId
         });
+    }
+
+    doRefresh(refresher) {
+        console.log("Begin async operation", refresher);
+
+        this.refreshWatchlist();
+
+        setTimeout(() => {
+            console.log("Async operation has ended");
+            refresher.complete();
+        }, 2000);
     }
 
     getMinToHours(minutes: number) {

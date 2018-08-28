@@ -24,7 +24,6 @@ export class AuthenticationProvider {
         return this.authState;
     }
 
-    // ASYNC needed here?
     login(user: User) {
         return this.afAuth.auth
             .signInWithEmailAndPassword(user.email, user.password)
@@ -33,7 +32,6 @@ export class AuthenticationProvider {
             });
     }
 
-    // ASYNC needed here?
     register(user: User) {
         return this.afAuth.auth
             .createUserAndRetrieveDataWithEmailAndPassword(
@@ -51,13 +49,16 @@ export class AuthenticationProvider {
     }
 
     getUserEmail(): string {
-        return "Fixme: Email Here";
-
-        // if (this.isAuthenticated() && this.afAuth.auth.currentUser.email) {
-        //     return this.afAuth.auth.currentUser.email;
-        // } else {
-        //     return "Email Here";
-        // }
+        //return "Logged In";
+        if (
+            this.isAuthenticated() &&
+            this.afAuth.auth.currentUser &&
+            this.afAuth.auth.currentUser.email
+        ) {
+            return this.afAuth.auth.currentUser.email;
+        } else {
+            return "Email Here";
+        }
     }
 
     //Sign user out of

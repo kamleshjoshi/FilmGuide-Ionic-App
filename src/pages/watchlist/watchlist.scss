@@ -1,7 +1,3 @@
-page-watchlist {
-    background: red;
-}
-
 .no-watchlist {
     font-size: 1em;
     text-align: center;
@@ -29,6 +25,12 @@ page-watchlist {
     margin-top: 30px;
     background: #fff;
     min-height: 180px;
+}
+
+.watchitem__deletebtn {
+    position: absolute;
+    right: 1em;
+    top: 1em;
 }
 
 .watchitem__poster img {
