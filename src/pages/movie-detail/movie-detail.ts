@@ -39,6 +39,8 @@ export class MovieDetailPage {
     movieInWatchList$: boolean;
     movieInFavouritesList$: boolean;
 
+    averageRating: number;
+
     loading: Loading;
     currentMovieReviews: Review[];
 
@@ -71,6 +73,11 @@ export class MovieDetailPage {
         this.currentMovie$.subscribe(movie => {
             this.isMovieInWatchlist(movie.id);
             this.isMovieInFavouriteslist(movie.id);
+        });
+
+        this.getAverageRating(parseInt(this.movieId)).then(average => {
+            this.averageRating = average;
+            console.log("Average updated: " + this.averageRating);
         });
     }
 
@@ -145,11 +152,23 @@ export class MovieDetailPage {
             RatingModalPage,
             {
                 movieId: this.movieId,
-                tmdbRating: tmdbRating
+                tmdbRating: tmdbRating,
+                averageRating: this.averageRating
             },
             { cssClass: "rating-modal" }
         );
         ratingModal.present();
+    }
+
+    async getAverageRating(tmdbRating: number) {
+        const ratings = await this.firestore.getMovieRatings(
+            this.movieId,
+            tmdbRating
+        );
+
+        let sum = ratings.reduce((previous, current) => (current += previous));
+        let avg = sum / ratings.length;
+        return avg;
     }
 
     openActorDetail(castId: string, actorName: string) {
@@ -163,11 +182,18 @@ export class MovieDetailPage {
     doRefresh(refresher) {
         console.log("Begin async operation", refresher);
 
+        // Refresh reviews
         this.firestore
             .getMovieReviews(this.navParams.get("movieId"))
             .then(reviews => {
                 this.currentMovieReviews = reviews;
             });
+
+        // Refresh ratings
+        this.getAverageRating(parseInt(this.movieId)).then(average => {
+            this.averageRating = average;
+            console.log("Average updated: " + this.averageRating);
+        });
 
         setTimeout(() => {
             console.log("Async operation has ended");

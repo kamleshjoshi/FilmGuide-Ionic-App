@@ -1,16 +1,12 @@
-<!-- <ion-header>
-  <ion-navbar>
-    <ion-title>rating-modal</ion-title>
-  </ion-navbar>
-</ion-header> -->
+<ion-content>
 
 
-<ion-content padding>
-  <h1>Rate Movie</h1>
+  <div class="rateModalStars">
+    <bar-rating [max]="5" (rateChange)=rateMovie($event)></bar-rating>
+  </div>
 
-  <button ion-button (click)=" closeRatingModal() ">Cancel</button>
-  <button ion-button (click)="rateMovie(4)">Rate</button>
-
-
+  <div class="rateModalCancel">
+    <button ion-button (click)=" closeRatingModal() ">Cancel</button>
+  </div>
 
 </ion-content>

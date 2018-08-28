@@ -25,6 +25,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { MovieDbProvider } from "../providers/movie-db/movie-db";
 import { AuthenticationProvider } from "../providers/authentication/authentication";
 import { FirestoreProvider } from "../providers/firestore/firestore";
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
         HttpClientModule,
         AngularFireModule.initializeApp(FIREBASE_CONFIG), // Initialise AngularFireModule with Firebase Config
         AngularFireAuthModule,
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        BarRatingModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [

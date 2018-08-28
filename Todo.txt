@@ -1,11 +1,10 @@
 General:
-	- RATING - Place middle of screen, click outside to dismiss
+	- RATING -  Toast
 	- Refresh review/rating upon add
 	- Various loading screens... Load until pictures etc. downloaded..
 
 	- Movie Details - Director, Writer etc. details
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
-	- Redesign Homepage grid?
 	
 Hamburger Menu
 	- Login/Logout
@@ -13,7 +12,6 @@ Hamburger Menu
 	- Favourties
 	- Watchlist
 	- Watched List
-	- Recommendations
 	- About
 
 
@@ -24,13 +22,13 @@ DIFFERENT SCREENS
 - Search Result Screen
 - Favourites (Remove Button or swipe away to delete)
 - Watchlist (Remove Button or swipe away to delete)
-- Watched List (Remove Button or swipe away to delete)
-- Recommendations (Remove Button or swipe away to delete)
 - About Screen
+
+
+- Watched List (Remove Button or swipe away to delete)
 
 - Add reviews Screen or dialog box (Add Review - Star Selection + Paragraph)
 - Add rating Screen or simple dialog box
-
 
 
 FEATURES/UX:

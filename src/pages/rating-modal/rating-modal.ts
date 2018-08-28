@@ -1,10 +1,11 @@
 import { FirestoreProvider } from "./../../providers/firestore/firestore";
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import {
     IonicPage,
     NavController,
     NavParams,
-    ViewController
+    ViewController,
+    ToastController
 } from "ionic-angular";
 
 /**
@@ -23,24 +24,39 @@ export class RatingModalPage {
     movieId: string;
     tmdbAverage: number;
 
+    averageRating: number;
+
     constructor(
         private navCtrl: NavController,
         private navParams: NavParams,
         private firestore: FirestoreProvider,
-        private view: ViewController
+        private view: ViewController,
+        private toast: ToastController
     ) {
         this.movieId = this.navParams.get("movieId");
         this.tmdbAverage = this.navParams.get("tmdbRating");
+        this.averageRating = this.navParams.get("averageRating");
+        console.log("average rating: " + this.averageRating);
     }
 
-    rateMovie(rating: number) {
-        // Add safety check for submission...
+    rateMovie(rating) {
+        //Add safety check for submission...
         this.firestore.addMovieRating(this.movieId, rating, this.tmdbAverage);
+
+        this.toast
+            .create({
+                message:
+                    "Rating Added Successfully - Pull down to refresh rating!",
+                duration: 3000
+            })
+            .present();
 
         this.closeRatingModal();
     }
 
     closeRatingModal() {
+        // To do, display toast..
+
         this.view.dismiss();
     }
 }

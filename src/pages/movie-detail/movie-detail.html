@@ -49,9 +49,6 @@
     </div>
   </div>
 
-  <div *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
-    Rate Movie
-  </div>
 
   <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
 
@@ -71,6 +68,13 @@
       from Favourites
     </button>
   </div>
+
+  <div class="movieDetailRating" class="movie__starrating" *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
+    <div>
+      <bar-rating [rate]="this.averageRating" [readOnly]="true" [max]="5"></bar-rating>
+    </div>
+  </div>
+
 
   <div class="moviePlot" *ngIf="currentMovie$ | async as movie;">
     <h4>Overview</h4>
