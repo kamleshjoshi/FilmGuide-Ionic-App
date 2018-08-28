@@ -15,9 +15,26 @@ export class FirestoreProvider {
 
         this.getMovieReviews(movieId).then(reviewsArray => {
             reviewsArray.unshift(review);
-            this.firestore.doc("movies/" + movieId).set({
-                reviews: reviewsArray
-            });
+            this.firestore.doc("movies/" + movieId).set(
+                {
+                    reviews: reviewsArray
+                },
+                {
+                    merge: true
+                }
+            );
+        });
+    }
+
+    addMovieRating(movieId: string, rating: number, tmdbAverage: number) {
+        this.getMovieRatings(movieId, tmdbAverage).then(ratingsArray => {
+            ratingsArray.push(rating);
+            this.firestore.doc("movies/" + movieId).set(
+                {
+                    ratings: ratingsArray
+                },
+                { merge: true }
+            );
         });
     }
 
@@ -122,6 +139,28 @@ export class FirestoreProvider {
                             "Document not found, resolving empty array"
                         );
                         resolve([]);
+                    }
+                })
+                .catch(function(error) {
+                    reject("Error getting document: " + error);
+                });
+        });
+    }
+
+    getMovieRatings(movieId: string, tmdbAverage: number) {
+        return new Promise<number[]>((resolve, reject) => {
+            this.firestore
+                .collection("movies")
+                .doc(movieId.toString())
+                .ref.get()
+                .then(function(doc) {
+                    if (doc.exists) {
+                        resolve(doc.data().ratings || [tmdbAverage]);
+                    } else {
+                        console.log(
+                            "Document not found, resolving empty array"
+                        );
+                        resolve([tmdbAverage]);
                     }
                 })
                 .catch(function(error) {

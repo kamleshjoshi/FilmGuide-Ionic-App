@@ -4,35 +4,44 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <div *ngIf="currentActorDetails$ | async as actorDetail">
-    <img *ngIf="actorDetail.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + actorDetail.profile_path" />
-    <img *ngIf="!actorDetail.profile_path" src="../assets/imgs/poster_unavailable.jpg" />
+  <div class="actor">
+    <div class="actor__backdrop"></div>
+    <div *ngIf="currentActorDetails$ | async as actorDetail">
+      <div class="actor__img">
+        <img *ngIf="actorDetail.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + actorDetail.profile_path" />
+        <img *ngIf="!actorDetail.profile_path" src="../assets/imgs/poster_unavailable.jpg" />
+        <h1 class="actor__name">{{actorDetail.name}}</h1>
+      </div>
 
-    <div>
-      <p>{{actorDetail.biography}}</p>
-    </div>
-
-  </div>
-
-  <div *ngIf="currentActorCredits$ | async as actorCredits">
-    <h1>Known For</h1>
-    <div *ngFor="let movie of actorCredits.cast; let i = index">
-
-      <div *ngIf="i < 10">
-        <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
-        <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
+      <div class="actor__bio">
+        <p>{{actorDetail.biography}}</p>
       </div>
     </div>
+
+
+
+    <div *ngIf="currentActorCredits$ | async as actorCredits" class="watchlist">
+      <h1 class="heading"> Known For</h1>
+      <ion-list *ngFor="let movie of actorCredits.cast; let i = index">
+
+        <ion-item *ngIf="i < 10" (click)="openMovieDetail(movie.id)">
+          <div class="watchitem">
+            <div class="watchitem__poster">
+              <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
+              <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
+            </div>
+            <div class="watchitem__details">
+              <div class="watchitem__title">{{movie.title}}</div>
+              <p class="watchitem__plot">{{movie.overview | slice:0:250}} ... </p>
+            </div>
+          </div>
+
+        </ion-item>
+
+      </ion-list>
+    </div>
+
   </div>
-
-
-
-
-
-
-
-
-
 </ion-content>

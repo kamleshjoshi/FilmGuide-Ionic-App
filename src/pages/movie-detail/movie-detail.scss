@@ -2,6 +2,12 @@
     background-color: #f0f4f4;
 }
 
+.backdrop-none {
+    max-height: 75px;
+    width: 100%;
+    display: block;
+}
+
 .movieheader {
     margin-top: -2em;
     display: flex;

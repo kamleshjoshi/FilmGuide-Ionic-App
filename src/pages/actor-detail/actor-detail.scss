@@ -1,3 +1,53 @@
 page-actor-detail {
     background-color: #f0f4f4;
 }
+
+.actor {
+    padding-top: 110px;
+    position: relative;
+    background-color: #f0f4f4;
+}
+
+.actor__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    background: grey;
+    background-image: url("../assets/imgs/default_backdrop.jpg");
+}
+
+.actor__img {
+    position: absolute;
+    top: 20px;
+    left: 1em;
+    right: 0;
+}
+
+.actor__img img {
+    max-width: 100px;
+    float: left;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+    border: 5px solid #fff;
+}
+
+.actor__name {
+    margin: 103px 0 0 110px;
+    overflow: hidden;
+    font-size: 1.8em;
+}
+
+.actor__bio {
+    padding-top: 5em;
+    border-top: 1px solid #ccc;
+}
+
+.actor__bio p {
+    background: #fff;
+    padding: 1em;
+}
+
+.heading {
+    color: #333338;
+}

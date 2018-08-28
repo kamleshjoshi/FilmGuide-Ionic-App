@@ -12,12 +12,11 @@
 
   <div class="backdrop" *ngIf="currentMovie$ | async as movie">
     <img *ngIf="movie.backdrop_path" [src]="'https://image.tmdb.org/t/p/w780' + movie.backdrop_path">
-    <img *ngIf="!movie.poster_path" src="../assets/imgs/default_backdrop.jpg" />
+    <img *ngIf="!movie.poster_path" class="backdrop-none" src="../assets/imgs/default_backdrop.jpg" />
   </div>
 
 
   <div class="movieheader">
-
     <div class="movieheader__poster" *ngIf="currentMovie$ | async as movie; else presentLoading()">
       <img *ngIf="movie.poster_path" class="poster" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path">
       <img *ngIf="!movie.poster_path" src="../assets/imgs/poster_unavailable.jpg" />
@@ -50,6 +49,9 @@
     </div>
   </div>
 
+  <div *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
+    Rate Movie
+  </div>
 
   <div class="movieheader__btngroup" *ngIf="currentMovie$ | async as movie;">
 

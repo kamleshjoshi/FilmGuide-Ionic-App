@@ -1,3 +1,4 @@
+import { RatingModalPage } from "./../rating-modal/rating-modal";
 import { MovieDbProvider } from "./../../providers/movie-db/movie-db";
 import { ActorDetailPage } from "./../actor-detail/actor-detail";
 import { Review } from "./../../models/review.model";
@@ -132,6 +133,23 @@ export class MovieDetailPage {
             { cssClass: "review-modal" }
         );
         reviewModal.present();
+    }
+
+    displayRatingsModal(tmdbRating: number) {
+        if (!this.auth.isAuthenticated()) {
+            this.displayFeatureUnavailable("rate a movie");
+            return;
+        }
+
+        const ratingModal = this.modalCtrl.create(
+            RatingModalPage,
+            {
+                movieId: this.movieId,
+                tmdbRating: tmdbRating
+            },
+            { cssClass: "rating-modal" }
+        );
+        ratingModal.present();
     }
 
     openActorDetail(castId: string, actorName: string) {

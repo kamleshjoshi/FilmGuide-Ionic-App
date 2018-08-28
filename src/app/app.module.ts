@@ -1,3 +1,4 @@
+import { RatingModalPage } from "./../pages/rating-modal/rating-modal";
 import { ActorDetailPage } from "./../pages/actor-detail/actor-detail";
 import { SearchResultsPage } from "./../pages/search-results/search-results";
 import { ReviewModalPage } from "./../pages/review-modal/review-modal";
@@ -36,7 +37,8 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
         FavouritesPage,
         ReviewModalPage,
         SearchResultsPage,
-        ActorDetailPage
+        ActorDetailPage,
+        RatingModalPage
     ],
     imports: [
         BrowserModule,
@@ -57,7 +59,8 @@ import { FirestoreProvider } from "../providers/firestore/firestore";
         FavouritesPage,
         ReviewModalPage,
         SearchResultsPage,
-        ActorDetailPage
+        ActorDetailPage,
+        RatingModalPage
     ],
     providers: [
         StatusBar,

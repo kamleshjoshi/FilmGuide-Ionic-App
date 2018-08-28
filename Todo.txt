@@ -1,15 +1,11 @@
 General:
-	- Smaller when backdrop not available...
-	- Actor page
-	- RATING
+	- RATING - Place middle of screen, click outside to dismiss
+	- Refresh review/rating upon add
+	- Various loading screens... Load until pictures etc. downloaded..
+
 	- Movie Details - Director, Writer etc. details
-	- Various loading screens... Load until pictures etc. downloaded...
-	
-	- Auto refresh after review add
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
-	- Watchlist, Favourites - Swipe to delete
 	- Redesign Homepage grid?
-	- Load more on home page?
 	
 Hamburger Menu
 	- Login/Logout
