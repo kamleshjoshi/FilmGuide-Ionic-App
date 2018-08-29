@@ -22,6 +22,8 @@ export class FavouritesPage {
     favourites$: any[];
     detailedFavourites$: Observable<MovieDetail>[];
 
+    itemLimit: number = 10;
+
     constructor(
         private navCtrl: NavController,
         private firestore: FirestoreProvider,
@@ -83,6 +85,21 @@ export class FavouritesPage {
             console.log("Async operation has ended");
             refresher.complete();
         }, 2000);
+    }
+
+    doInfinite(infiniteScroll, totalItems) {
+        console.log("Begin async operation");
+
+        if (this.itemLimit > totalItems) {
+            infiniteScroll.complete();
+            return;
+        }
+
+        setTimeout(() => {
+            this.itemLimit += 6;
+            console.log("Async operation has ended");
+            infiniteScroll.complete();
+        }, 1000);
     }
 
     getMinToHours(minutes: number) {

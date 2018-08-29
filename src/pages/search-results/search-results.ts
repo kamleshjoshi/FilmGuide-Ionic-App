@@ -14,6 +14,8 @@ export class SearchResultsPage {
     searchResults$: Observable<SearchResult>[];
     searchQuery: string;
 
+    itemLimit: number = 10;
+
     constructor(
         private navParams: NavParams,
         private navCtrl: NavController,
@@ -29,5 +31,20 @@ export class SearchResultsPage {
             movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
             movieId: movieId
         });
+    }
+
+    doInfinite(infiniteScroll, totalItems) {
+        console.log("Begin async operation");
+
+        if (this.itemLimit > totalItems) {
+            infiniteScroll.complete();
+            return;
+        }
+
+        setTimeout(() => {
+            this.itemLimit += 6;
+            console.log("Async operation has ended");
+            infiniteScroll.complete();
+        }, 1000);
     }
 }

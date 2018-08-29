@@ -14,9 +14,9 @@
   </ion-refresher>
 
   <div *ngIf="detailedFavourites$?.length > 0" class="watchlist">
-    <ion-list *ngFor="let obs of detailedFavourites$; let i = index">
+    <ion-list *ngFor="let obs of detailedFavourites$.reverse(); let i = index">
 
-      <ion-item *ngIf="obs | async as movie" (click)="openMovieDetail(movie.id)">
+      <ion-item *ngIf="i < this.itemLimit && obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
 
           <div (click)="removeItemFromFavourites(i, movie.id, movie.title)" class="watchitem__deletebtn">
@@ -43,8 +43,12 @@
         </div>
 
       </ion-item>
-
     </ion-list>
+
+    <ion-infinite-scroll class="actorInfiniteScroll" (ionInfinite)="doInfinite($event, detailedFavourites$?.length)">
+      <ion-infinite-scroll-content loadingText="Loading more movies...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 
   <div *ngIf="detailedFavourites$?.length === 0">

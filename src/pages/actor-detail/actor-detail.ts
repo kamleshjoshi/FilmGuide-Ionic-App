@@ -15,7 +15,7 @@ export class ActorDetailPage {
     currentActorDetails$: Observable<ActorDetail>;
     currentActorCredits$: Observable<ActorCredits>;
     actorName: string = "Loading...";
-    pageLimit: number = 10;
+    itemLimit: number = 10;
 
     constructor(
         private navCtrl: NavController,
@@ -37,15 +37,16 @@ export class ActorDetailPage {
         });
     }
 
-    doInfinite(infiniteScroll, totalCredits) {
+    doInfinite(infiniteScroll, totalItems) {
         console.log("Begin async operation");
 
-        if (this.pageLimit > totalCredits) {
+        if (this.itemLimit > totalItems) {
+            infiniteScroll.complete();
             return;
         }
 
         setTimeout(() => {
-            this.pageLimit += 6;
+            this.itemLimit += 6;
             console.log("Async operation has ended");
             infiniteScroll.complete();
         }, 1000);

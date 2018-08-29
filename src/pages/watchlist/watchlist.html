@@ -14,15 +14,14 @@
   </ion-refresher>
 
   <div *ngIf="detailedWatchlist$?.length > 0" class="watchlist">
-    <ion-list *ngFor="let obs of detailedWatchlist$; let i = index">
+    <ion-list *ngFor="let obs of detailedWatchlist$.reverse(); let i = index">
 
-      <ion-item *ngIf="obs | async as movie" (click)="openMovieDetail(movie.id)">
+      <ion-item *ngIf="i < this.itemLimit && obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
 
           <div (click)="removeItemFromWatchlist(i, movie.id, movie.title)" class="watchitem__deletebtn">
             <ion-icon name="close"></ion-icon>
           </div>
-
 
           <div class="watchitem__poster">
             <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
@@ -45,6 +44,12 @@
       </ion-item>
 
     </ion-list>
+
+    <ion-infinite-scroll class="actorInfiniteScroll" (ionInfinite)="doInfinite($event, detailedWatchlist$?.length)">
+      <ion-infinite-scroll-content loadingText="Loading more movies...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
   </div>
 
   <div *ngIf="detailedWatchlist$?.length === 0">

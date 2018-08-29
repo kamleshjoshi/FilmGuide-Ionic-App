@@ -32,7 +32,7 @@
 
       <ion-list *ngFor="let movie of actorCredits.cast; let i = index">
 
-        <ion-item *ngIf="i < this.pageLimit" (click)="openMovieDetail(movie.id)">
+        <ion-item *ngIf="i < this.itemLimit" (click)="openMovieDetail(movie.id)">
           <div class="watchitem">
             <div class="watchitem__poster">
               <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
@@ -50,7 +50,6 @@
 
       <ion-infinite-scroll class="actorInfiniteScroll" (ionInfinite)="doInfinite($event, actorCredits.cast.length)">
         <ion-infinite-scroll-content loadingText="Loading more movies...">
-
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
 

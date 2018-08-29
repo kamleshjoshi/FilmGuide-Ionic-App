@@ -35,7 +35,6 @@ export class MyApp {
             { title: "Browse", component: HomePage },
             { title: "Watchlist", component: WatchlistPage },
             { title: "Favourites", component: FavouritesPage },
-            { title: "My Recommendations", component: HomePage },
             { title: "About", component: HomePage }
         ];
     }

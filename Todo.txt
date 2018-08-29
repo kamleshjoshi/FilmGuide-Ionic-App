@@ -1,17 +1,13 @@
 General:
 	- Refresh review/rating upon add
+	- Watchlist, Favoutes - Delete button opening movie too.
 	- Various loading screens... Load until pictures etc. downloaded..
+	- About Page
+
 
 	- Movie Details - Director, Writer etc. details
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
 	
-Hamburger Menu
-	- Login/Logout
-	- Browse (Popular movies slideshow, latest movies grid below) -> Movie Page
-	- Favourties
-	- Watchlist
-	- Watched List
-	- About
 
 
 DIFFERENT SCREENS
