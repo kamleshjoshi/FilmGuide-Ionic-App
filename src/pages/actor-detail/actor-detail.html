@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="actor__content">
 
   <div class="actor">
     <div class="actor__backdrop"></div>
@@ -16,17 +16,23 @@
       </div>
 
       <div class="actor__bio">
-        <p>{{actorDetail.biography}}</p>
+        <div class="inner__bio">
+          <h4>Biography</h4>
+          <p>
+            {{actorDetail.biography}}
+          </p>
+        </div>
+
       </div>
     </div>
 
 
 
     <div *ngIf="currentActorCredits$ | async as actorCredits" class="watchlist">
-      <h1 class="heading"> Known For</h1>
+
       <ion-list *ngFor="let movie of actorCredits.cast; let i = index">
 
-        <ion-item *ngIf="i < 10" (click)="openMovieDetail(movie.id)">
+        <ion-item *ngIf="i < this.pageLimit" (click)="openMovieDetail(movie.id)">
           <div class="watchitem">
             <div class="watchitem__poster">
               <img *ngIf="movie.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" />
@@ -41,7 +47,15 @@
         </ion-item>
 
       </ion-list>
-    </div>
 
+      <ion-infinite-scroll class="actorInfiniteScroll" (ionInfinite)="doInfinite($event, actorCredits.cast.length)">
+        <ion-infinite-scroll-content loadingText="Loading more movies...">
+
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+
+    </div>
   </div>
+
 </ion-content>

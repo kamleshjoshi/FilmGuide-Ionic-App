@@ -1,5 +1,4 @@
 General:
-	- RATING - Rate only if logged in...
 	- Refresh review/rating upon add
 	- Various loading screens... Load until pictures etc. downloaded..
 

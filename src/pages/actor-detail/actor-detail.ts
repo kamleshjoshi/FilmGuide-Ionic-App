@@ -15,6 +15,7 @@ export class ActorDetailPage {
     currentActorDetails$: Observable<ActorDetail>;
     currentActorCredits$: Observable<ActorCredits>;
     actorName: string = "Loading...";
+    pageLimit: number = 10;
 
     constructor(
         private navCtrl: NavController,
@@ -34,5 +35,19 @@ export class ActorDetailPage {
             movieCastObservable: this.movieDbProvider.getMovieCredits(movieId),
             movieId: movieId
         });
+    }
+
+    doInfinite(infiniteScroll, totalCredits) {
+        console.log("Begin async operation");
+
+        if (this.pageLimit > totalCredits) {
+            return;
+        }
+
+        setTimeout(() => {
+            this.pageLimit += 6;
+            console.log("Async operation has ended");
+            infiniteScroll.complete();
+        }, 1000);
     }
 }

@@ -2,6 +2,10 @@ page-actor-detail {
     background-color: #f0f4f4;
 }
 
+.actor__content {
+    background-color: #f0f4f4;
+}
+
 .actor {
     padding-top: 110px;
     position: relative;
@@ -43,11 +47,16 @@ page-actor-detail {
     border-top: 1px solid #ccc;
 }
 
-.actor__bio p {
+.actor__bio .inner__bio {
     background: #fff;
     padding: 1em;
 }
 
 .heading {
     color: #333338;
+    margin-top: 20px;
+}
+
+.actorInfiniteScroll {
+    margin-top: 25px;
 }
