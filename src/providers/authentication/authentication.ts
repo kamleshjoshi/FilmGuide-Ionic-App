@@ -1,14 +1,7 @@
-import { FirestoreProvider } from "./../firestore/firestore";
 import { User } from "../../models/user.model";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
 
-/*
-  Generated class for the AuthenticationProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthenticationProvider {
     authState = null;

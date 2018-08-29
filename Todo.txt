@@ -1,31 +1,12 @@
 General:
-	- Refresh review/rating upon add
 	- Watchlist, Favoutes - Delete button opening movie too.
-	- Various loading screens... Load until pictures etc. downloaded..
+	- Rate Button!!!
 	- About Page
-
+	- Various loading screens... Load until pictures etc. downloaded..
+	- Refresh review/rating upon add
 
 	- Movie Details - Director, Writer etc. details
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
 	
 
 
-DIFFERENT SCREENS
-- Loading/Splash Screen
-- Browse Screen 
-- Movie Screen (viewing movie info)
-- Search Result Screen
-- Favourites (Remove Button or swipe away to delete)
-- Watchlist (Remove Button or swipe away to delete)
-- About Screen
-
-
-- Watched List (Remove Button or swipe away to delete)
-
-- Add reviews Screen or dialog box (Add Review - Star Selection + Paragraph)
-- Add rating Screen or simple dialog box
-
-
-FEATURES/UX:
-	- Lazy Loading Pages and Components
-	- 
