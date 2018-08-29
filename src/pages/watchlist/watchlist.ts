@@ -58,8 +58,10 @@ export class WatchlistPage {
         }
     }
 
-    removeItemFromWatchlist(index: number, movieId: number, movieName: string) {
-        this.detailedWatchlist$.splice(index, 1);
+    removeItemFromWatchlist(listLength: number, index: number, movieId: number, movieName: string) {
+        // Flip index due to reversed arrray.
+        let indexToDel = listLength - index - 1;
+        this.detailedWatchlist$.splice(indexToDel, 1);
 
         // Remove from watchlist
         this.firestore.toggleWatchlistItem(movieId, false);

@@ -1,5 +1,4 @@
 General:
-	- Watchlist, Favoutes - Delete button opening movie too.
 	- Rate Button!!!
 	- About Page
 	- Various loading screens... Load until pictures etc. downloaded..

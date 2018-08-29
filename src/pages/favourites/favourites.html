@@ -19,7 +19,7 @@
       <ion-item *ngIf="i < this.itemLimit && obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
 
-          <div (click)="removeItemFromFavourites(i, movie.id, movie.title)" class="watchitem__deletebtn">
+          <div (click)="removeItemFromFavourites(detailedFavourites$.length, i, movie.id, movie.title); $event.stopPropagation(); " class="watchitem__deletebtn">
             <ion-icon name="close"></ion-icon>
           </div>
 

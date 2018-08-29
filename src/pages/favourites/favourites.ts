@@ -65,12 +65,10 @@ export class FavouritesPage {
         });
     }
 
-    removeItemFromFavourites(
-        index: number,
-        movieId: number,
-        movieName: string
-    ) {
-        this.detailedFavourites$.splice(index, 1);
+    removeItemFromFavourites(listLength: number, index: number,movieId: number,movieName: string ) {
+        // Flip index due to reversed arrray.
+        let indexToDel = listLength - index - 1;
+        this.detailedFavourites$.splice(indexToDel, 1);
 
         // Remove from watchlist
         this.firestore.toggleFavouritesItem(movieId, false);
