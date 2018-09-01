@@ -52,7 +52,7 @@ export class FirestoreProvider {
                 var dirtyWatchlist = [...watchlist, movieId];
                 filteredWatchlist = Array.from(new Set(dirtyWatchlist));
             } else {
-                console.log("ERROR: ****************************************");
+                console.log("Error Toggling Watchlist Item");
             }
 
             this.firestore.doc(`users/${userId}`).set(
@@ -81,7 +81,7 @@ export class FirestoreProvider {
                     new Set(dirtyfavouriteslist)
                 );
             } else {
-                console.log("ERROR: ****************************************");
+                console.log("Error Toggling Favourites Item");
                 return;
             }
 

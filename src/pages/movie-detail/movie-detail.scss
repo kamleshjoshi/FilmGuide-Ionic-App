@@ -117,7 +117,6 @@
 }
 .reviews-btn {
     position: absolute;
-
     top: 2.2em;
     right: 1em;
     font-size: 0.8em;
@@ -160,10 +159,22 @@
     color: #01d277;
 }
 
+.movie__starrating {
+    display: flex;
+    justify-content: center;
+}
+
 .movie__starrating .br-units {
     justify-content: center;
 }
 
 .movie__starrating .br {
     margin-top: 0 !important;
+}
+
+.rateButton {
+    margin-top: 17px;
+    height: 1.9em;
+    width: 95px;
+    font-size: 0.8em;
 }

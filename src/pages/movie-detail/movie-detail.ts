@@ -21,13 +21,6 @@ import {
 import { Observable } from "../../../node_modules/rxjs/Observable";
 import { MovieCredits } from "../../models/movieCredits.model";
 
-/**
- * Generated class for the MovieDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
     selector: "page-movie-detail",

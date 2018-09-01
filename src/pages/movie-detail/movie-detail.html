@@ -69,10 +69,15 @@
     </button>
   </div>
 
-  <div class="movie__starrating" *ngIf="currentMovie$ | async as movie" (click)="displayRatingsModal(movie.vote_average)">
+  <div class="movie__starrating" *ngIf="currentMovie$ | async as movie">
     <div>
       <bar-rating [rate]="this.averageRating" [readOnly]="true" [max]="5"></bar-rating>
     </div>
+
+    <button class="rateButton" ion-button small round color="secondary" (click)="displayRatingsModal(movie.vote_average)">Rate
+      Movie
+    </button>
+
   </div>
 
 

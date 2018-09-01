@@ -1,8 +1,9 @@
 General:
-	- Rate Button!!!
 	- About Page
+	- Code cleanup, comments
 	- Various loading screens... Load until pictures etc. downloaded..
 	- Refresh review/rating upon add
+
 
 	- Movie Details - Director, Writer etc. details
 	- Look into Error message: "ERROR******" when adding and removing movies fast...
