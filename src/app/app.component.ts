@@ -34,8 +34,7 @@ export class MyApp {
         this.pages = [
             { title: "Browse", component: HomePage },
             { title: "Watchlist", component: WatchlistPage },
-            { title: "Favourites", component: FavouritesPage },
-            { title: "About", component: HomePage }
+            { title: "Favourites", component: FavouritesPage }
         ];
     }
 
