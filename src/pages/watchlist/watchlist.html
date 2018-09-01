@@ -16,10 +16,11 @@
   <div *ngIf="detailedWatchlist$?.length > 0" class="watchlist">
     <ion-list *ngFor="let obs of detailedWatchlist$.reverse(); let i = index">
 
-      <ion-item *ngIf="i < this.itemLimit && obs | async as movie" >
+      <ion-item *ngIf="i < this.itemLimit && obs | async as movie" (click)="openMovieDetail(movie.id)">
         <div class="watchitem">
 
-          <div (click)=" removeItemFromWatchlist(detailedWatchlist$.length, i, movie.id, movie.title); $event.stopPropagation(); " class="watchitem__deletebtn">
+          <div (click)=" removeItemFromWatchlist(detailedWatchlist$.length, i, movie.id, movie.title); $event.stopPropagation(); "
+            class="watchitem__deletebtn">
             <ion-icon name="close"></ion-icon>
           </div>
 
